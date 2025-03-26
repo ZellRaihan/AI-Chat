@@ -18,14 +18,14 @@ const MainHeader = () => {
       <div className={styles.container}>
         <nav className={styles.navbar}>
           <div className={styles.logoContainer}>
-            <Link href="/" className={styles.logoLink}>
+            <Link href="/" className={styles.logoLink} aria-label="AI Chat Home">
               <span className={styles.logo}>AI Chat</span>
             </Link>
           </div>
           
-          <div className={`${styles.navigation} ${isMobileMenuOpen ? styles.mobileMenuOpen : ''}`}>
-            <Link href="/features" className={styles.navLink}>
-              Features
+          <div className={`${styles.navigation} ${isMobileMenuOpen ? styles.mobileMenuOpen : ''}`} role="navigation" aria-label="Main navigation">
+            <Link href="/" className={styles.navLink} aria-current="page">
+              Home
             </Link>
             <Link href="/settings" className={styles.navLink}>
               Settings
@@ -33,14 +33,14 @@ const MainHeader = () => {
           </div>
           
           <div className={styles.authButtons}>
-            <button onClick={toggleTheme} className={styles.themeToggle}>
+            <button onClick={toggleTheme} className={styles.themeToggle} aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}>
               {theme === 'dark' ? (
-                <i className="fas fa-sun"></i>
+                <i className="fas fa-sun" aria-hidden="true"></i>
               ) : (
-                <i className="fas fa-moon"></i>
+                <i className="fas fa-moon" aria-hidden="true"></i>
               )}
             </button>
-            <Link href="/chat" className={styles.startButton}>
+            <Link href="/chat" className={styles.startButton} aria-label="Start chatting with AI">
               Start Chatting
             </Link>
           </div>
