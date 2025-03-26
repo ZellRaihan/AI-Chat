@@ -1,8 +1,8 @@
 'use client';
 
 import React from 'react';
+import styles from '@/styles/PageLayout.module.css';
 import { useTheme } from './ThemeProvider';
-import styles from '../styles/PageLayout.module.css';
 
 interface PageLayoutProps {
   title: string;

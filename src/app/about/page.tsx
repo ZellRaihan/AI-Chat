@@ -1,12 +1,9 @@
-'use client';
-
 import React from 'react';
 import MainLayout from '@/components/MainLayout';
 import PageLayout from '@/components/PageLayout';
 import styles from './About.module.css';
-import { Metadata } from 'next';
 
-export const metadata: Metadata = {
+export const metadata = {
   title: 'About Us | AI-Chats.net - Leading AI Chat Platform',
   description: 'Learn about AI-Chats.net, our mission to make AI accessible to everyone, and how we\'re revolutionizing AI chat technology. Discover our values and team.',
   openGraph: {
