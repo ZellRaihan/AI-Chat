@@ -1,6 +1,6 @@
 // API keys
 export const API_KEYS = {
-  GEMINI: process.env.NEXT_PUBLIC_GEMINI_API_KEY || 'AIzaSyATE0TPITXrJkX4yd7h-Rf9mWt7UXNZrgM',
+  GEMINI: process.env.NEXT_PUBLIC_GEMINI_API_KEY || '',
   OPENAI: process.env.NEXT_PUBLIC_OPENAI_API_KEY || '',
   ANTHROPIC: process.env.NEXT_PUBLIC_ANTHROPIC_API_KEY || '',
   COHERE: process.env.NEXT_PUBLIC_COHERE_API_KEY || '',
