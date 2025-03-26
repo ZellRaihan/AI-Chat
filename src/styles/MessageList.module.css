@@ -1,0 +1,688 @@
+.messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  scroll-behavior: smooth;
+  background-color: var(--chat-bg);
+}
+
+.welcomeMessage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  max-width: 600px;
+  margin: auto;
+  padding: 3rem 2rem;
+  background-color: rgba(255, 255, 255, 0.03);
+  border-radius: var(--border-radius);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.5s ease-out;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+}
+
+.welcomeHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.welcomeHeader i {
+  font-size: 2.5rem;
+  color: #8b5cf6;
+  margin-bottom: 1.25rem;
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(139, 92, 246, 0.05));
+  width: 90px;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  box-shadow: 0 0 25px rgba(139, 92, 246, 0.3);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+}
+
+.welcomeHeader h2 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text-color);
+  margin-bottom: 0.75rem;
+  background: linear-gradient(to right, #8b5cf6, #6366f1);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.welcomeMessage p {
+  font-size: 1.1rem;
+  color: var(--text-color-secondary);
+  line-height: 1.7;
+  margin-bottom: 1.75rem;
+}
+
+.welcomeFeatures {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  width: 100%;
+  max-width: 400px;
+}
+
+.welcomeFeature {
+  display: flex;
+  align-items: center;
+  padding: 0.85rem 1.25rem;
+  background-color: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.welcomeFeature:hover {
+  transform: translateY(-3px);
+  background-color: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+  border-color: rgba(139, 92, 246, 0.2);
+}
+
+.welcomeFeature i {
+  font-size: 1.1rem;
+  color: #8b5cf6;
+  margin-right: 1rem;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(139, 92, 246, 0.1);
+  border-radius: 50%;
+}
+
+.welcomeFeature span {
+  font-size: 1rem;
+  color: var(--text-color);
+  font-weight: 500;
+}
+
+.message {
+  display: flex;
+  flex-direction: column;
+  max-width: 90%;
+  position: relative;
+  animation: messageIn 0.3s ease;
+  margin-bottom: 8px;
+}
+
+@keyframes messageIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.userMessage {
+  align-self: flex-end;
+}
+
+.aiMessage {
+  align-self: flex-start;
+}
+
+.messageContent {
+  padding: 1rem 1.25rem;
+  border-radius: var(--border-radius);
+  position: relative;
+  color: var(--text-color);
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-size: 1rem;
+}
+
+.userMessage .messageContent {
+  background: var(--chat-user-bg);
+  color: white;
+  border-radius: 18px 18px 0 18px;
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+}
+
+.aiMessage .messageContent {
+  background-color: var(--chat-ai-bg);
+  border: 1px solid var(--ai-message-border);
+  border-radius: 0 18px 18px 18px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  color: var(--text-color);
+}
+
+.editedMessage {
+  position: relative;
+}
+
+.editedMessage .messageContent {
+  border-left: 2px solid rgba(16, 185, 129, 0.5);
+  animation: highlightEdit 2s ease-in-out;
+}
+
+@keyframes highlightEdit {
+  0% {
+    background-color: rgba(16, 185, 129, 0.1);
+  }
+  50% {
+    background-color: rgba(16, 185, 129, 0.2);
+  }
+  100% {
+    background-color: inherit;
+  }
+}
+
+.messageEdited {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin-left: 0.5rem;
+  font-style: italic;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.editHint {
+  color: rgba(255, 255, 255, 0.4);
+  font-style: normal;
+  font-size: 0.65rem;
+}
+
+.aiMessage .messageEdited {
+  color: var(--text-color-secondary);
+}
+
+.messageActions {
+  position: relative;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+  margin-top: 0.5rem;
+  opacity: 0.4;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  transform: translateY(0);
+}
+
+.message:hover .messageActions {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.editedMessage .messageActions {
+  opacity: 0.8;
+  transform: translateY(0);
+}
+
+.aiMessage .messageActions {
+  justify-content: flex-start;
+}
+
+.messageActionBtn {
+  height: 32px;
+  border-radius: 16px;
+  background-color: var(--bg-color-secondary);
+  color: var(--text-color-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 0.8rem;
+  border: none;
+  gap: 0.5rem;
+  min-width: fit-content;
+  border: 1px solid var(--border-color);
+}
+
+.messageActionBtn svg {
+  width: 14px;
+  height: 14px;
+  stroke-width: 2;
+}
+
+.actionBtnLabel {
+  display: inline;
+  font-size: 0.75rem;
+  font-weight: 500;
+  margin-left: 0.25rem;
+}
+
+.editBtn {
+  background-color: rgba(16, 185, 129, 0.1);
+  color: var(--text-color);
+  border-color: rgba(16, 185, 129, 0.2);
+}
+
+.editBtn:hover {
+  background-color: rgba(16, 185, 129, 0.2);
+  color: #10b981;
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+.revertBtn {
+  background-color: rgba(59, 130, 246, 0.1);
+  color: var(--text-color);
+  border-color: rgba(59, 130, 246, 0.2);
+}
+
+.revertBtn:hover {
+  background-color: rgba(59, 130, 246, 0.2);
+  color: #3b82f6;
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
+.copyBtn {
+  background-color: rgba(139, 92, 246, 0.1);
+  color: var(--text-color);
+  border-color: rgba(139, 92, 246, 0.2);
+}
+
+.copyBtn:hover {
+  background-color: rgba(139, 92, 246, 0.2);
+  color: #8b5cf6;
+  border-color: rgba(139, 92, 246, 0.3);
+}
+
+/* Confirmation styles for copy button */
+.messageActionBtn[title="Copied!"] {
+  background-color: rgba(34, 197, 94, 0.3);
+  color: rgba(34, 197, 94, 1);
+  transform: scale(1.08);
+}
+
+.messageInfo {
+  display: flex;
+  align-items: center;
+  padding: 0.25rem 0.5rem;
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  color: var(--text-color-secondary);
+  justify-content: flex-end;
+}
+
+/* Adjust spacing if both actions and info are present */
+.messageActions + .messageInfo {
+  margin-top: 0.1rem;
+}
+
+.aiMessage .messageInfo {
+  justify-content: flex-start;
+}
+
+.messageTime {
+  margin-left: 0.5rem;
+}
+
+.aiMessage .messageTime {
+  margin-left: 0;
+  margin-right: 0.5rem;
+}
+
+.providerBadge {
+  font-size: 0.65rem;
+  font-weight: 500;
+  padding: 0.15rem 0.4rem;
+  border-radius: 3px;
+  background-color: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.7);
+  margin-left: 0.5rem;
+  text-transform: capitalize;
+}
+
+/* Provider-specific badges */
+.provider-gpt-4o, 
+.provider-gpt-4-turbo, 
+.provider-gpt-3-5-turbo {
+  background-color: rgba(25, 195, 125, 0.1);
+  color: var(--openai-color);
+}
+
+.provider-claude-3-5-sonnet, 
+.provider-claude-3-opus,
+.provider-claude-3-haiku {
+  background-color: rgba(179, 85, 246, 0.1);
+  color: var(--anthropic-color);
+}
+
+.provider-gemini-1-5-flash,
+.provider-gemini-1-5-pro {
+  background-color: rgba(66, 133, 244, 0.1);
+  color: var(--google-color);
+}
+
+.provider-llama-3-1-70b,
+.provider-llama-3-1-405b {
+  background-color: rgba(8, 102, 255, 0.1);
+  color: var(--meta-color);
+}
+
+.provider-command-r,
+.provider-command-r-plus {
+  background-color: rgba(126, 87, 194, 0.1);
+  color: var(--cohere-color);
+}
+
+.provider-error {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: var(--danger-color);
+}
+
+/* Thinking indicator */
+.thinkingIndicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  gap: 0.5rem;
+  min-width: 80px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  background-color: var(--thinking-indicator-color);
+  border-radius: 50%;
+  animation: dotPulse 1.4s infinite ease-in-out;
+  animation-fill-mode: both;
+}
+
+.dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes dotPulse {
+  0%, 100% {
+    transform: scale(0.75);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Media queries */
+@media (max-width: 768px) {
+  .messages {
+    padding: 1rem;
+    gap: 1rem;
+    padding-bottom: 150px; /* Increased padding to ensure buttons aren't hidden */
+    -webkit-overflow-scrolling: touch;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .welcomeMessage {
+    padding: 1.5rem 1rem;
+    margin-bottom: 100px; /* Increased margin to ensure welcome message isn't hidden */
+  }
+  
+  .welcomeHeader i {
+    font-size: 2.5rem;
+    width: 60px;
+    height: 60px;
+  }
+  
+  .welcomeHeader h2 {
+    font-size: 1.5rem;
+  }
+  
+  .welcomeMessage p {
+    font-size: 0.95rem;
+  }
+  
+  .message {
+    max-width: 95%;
+    margin-bottom: 10px;
+  }
+  
+  .messageContent {
+    padding: 0.875rem 1rem;
+    font-size: 0.95rem;
+  }
+  
+  /* Always show message actions on mobile */
+  .messageActions {
+    opacity: 0.8;
+    transform: translateY(0);
+    margin-top: 0.35rem;
+    gap: 0.35rem;
+    /* Add a semi-transparent background to make buttons more visible */
+    background-color: var(--bg-color-secondary);
+    border-radius: 18px;
+    padding: 0.25rem 0.5rem;
+    /* Create a subtle bottom border */
+    border-bottom: 1px solid var(--border-color);
+    /* Fix z-index to appear above chat input */
+    position: relative;
+    z-index: 25;
+  }
+  
+  /* Make the message bottom margin larger to prevent actions from being hidden */
+  .message:last-of-type .messageActions {
+    position: relative;
+    z-index: 30;
+    background-color: var(--bg-color-tertiary);
+    transform: translateY(0);
+    border: 1px solid var(--border-color);
+  }
+  
+  .aiMessage .messageActions {
+    /* Adjust for AI messages which are on the left */
+    background-color: var(--bg-color-secondary);
+    border-bottom: 1px solid var(--border-color);
+  }
+  
+  .messageActionBtn {
+    width: auto;
+    height: 30px;
+    font-size: 0.8rem;
+    /* Make buttons more tap-friendly */
+    min-width: 32px;
+    min-height: 32px;
+    padding: 0.25rem 0.5rem;
+    background-color: var(--bg-color-tertiary);
+  }
+  
+  /* Show button labels on mobile for better accessibility */
+  .messageActionBtn .actionBtnLabel {
+    display: inline;
+    margin-left: 0.25rem;
+    font-size: 0.7rem;
+    max-width: 40px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  /* Make the action buttons more compact to fit side by side */
+  .editBtn, .revertBtn, .copyBtn {
+    flex: 1;
+    max-width: fit-content;
+    justify-content: center;
+  }
+  
+  .thinkingIndicator {
+    background-color: rgba(139, 92, 246, 0.1);
+    border-radius: 12px;
+    padding: 0.8rem 1.2rem;
+    min-width: 120px;
+    margin-top: 0.5rem;
+    box-shadow: 0 0 10px rgba(139, 92, 246, 0.2);
+  }
+  
+  .dot {
+    width: 12px;
+    height: 12px;
+  }
+  
+  .extraSpace {
+    height: 70px;
+    width: 100%;
+  }
+}
+
+.touchActive {
+  z-index: 10;
+  position: relative;
+  transform: scale(1.01);
+  transition: all 0.2s ease;
+}
+
+.touchActive .messageContent {
+  box-shadow: 0 0 0 2px var(--primary-color-hover);
+}
+
+.touchActive .messageActions {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+  /* Make touch active state more pronounced on mobile */
+  .touchActive {
+    z-index: 15;
+    transform: scale(1.02);
+  }
+  
+  .touchActive .messageContent {
+    box-shadow: 0 0 0 2px var(--primary-color);
+  }
+  
+  .touchActive .messageActions {
+    opacity: 1;
+    background-color: var(--bg-color-hover);
+    border-bottom: 1px solid var(--primary-color);
+  }
+}
+
+.editing {
+  position: relative !important;
+  z-index: 5;
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.5) !important;
+  transform: scale(1.01);
+  transition: all 0.3s ease-in-out;
+}
+
+.editing .messageContent {
+  border-left: 2px solid #10b981 !important;
+  background-color: rgba(16, 185, 129, 0.08) !important;
+}
+
+.editing.userMessage .messageContent {
+  background: linear-gradient(to right, rgba(16, 185, 129, 0.2), var(--primary-color-hover)) !important;
+  color: white !important;
+}
+
+/* Make edit button appear active when message is being edited */
+.editing .editBtn {
+  background-color: rgba(16, 185, 129, 0.5);
+  color: white;
+  font-weight: bold;
+  border-color: #10b981;
+}
+
+.updated {
+  animation: messageUpdated 2s ease-in-out;
+}
+
+.reverted {
+  animation: messageReverted 2s ease-in-out;
+}
+
+@keyframes messageUpdated {
+  0%, 100% {
+    background-color: transparent;
+  }
+  20%, 80% {
+    background-color: rgba(16, 185, 129, 0.1);
+  }
+}
+
+@keyframes messageReverted {
+  0%, 100% {
+    background-color: transparent;
+  }
+  20%, 80% {
+    background-color: rgba(59, 130, 246, 0.1);
+  }
+}
+
+.messagesEnd {
+  height: 0;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  scroll-margin-bottom: 120px; /* Helps ensure adequate space below last message */
+}
+
+.scrollToBottomBtn {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  z-index: 50;
+  transition: all 0.2s ease;
+  animation: fadeIn 0.3s ease;
+}
+
+.scrollToBottomBtn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  background-color: var(--primary-color-dark, #7c3aed);
+}
+
+.scrollToBottomBtn:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 768px) {
+  .scrollToBottomBtn {
+    bottom: 70px;
+    right: 15px;
+    width: 36px;
+    height: 36px;
+  }
+}
+
+.extraSpace {
+  height: 40px;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .extraSpace {
+    height: 70px;
+    width: 100%;
+  }
+} 

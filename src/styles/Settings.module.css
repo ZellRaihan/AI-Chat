@@ -1,0 +1,280 @@
+.settingsPage {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  width: 100%;
+  height: 60px;
+  background-color: var(--bg-color-secondary);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+}
+
+.headerContent {
+  width: 100%;
+  max-width: 960px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.backButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-color-secondary);
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+}
+
+.backButton:hover {
+  background-color: var(--bg-color-tertiary);
+  color: var(--text-color);
+}
+
+.backButton i {
+  font-size: 14px;
+}
+
+.themeToggle {
+  background: none;
+  border: none;
+  color: var(--text-color-secondary);
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+}
+
+.themeToggle:hover {
+  background-color: var(--bg-color-tertiary);
+  color: var(--text-color);
+}
+
+.themeToggle i {
+  font-size: 18px;
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px 20px;
+}
+
+.section {
+  width: 100%;
+  max-width: 800px;
+  margin-bottom: 40px;
+}
+
+.section h2 {
+  font-size: 20px;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.sectionDescription {
+  color: var(--text-color-secondary);
+  margin-bottom: 24px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.modelsList {
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.modelHeader {
+  display: grid;
+  grid-template-columns: 3fr 2fr 1fr 1fr;
+  padding: 12px 16px;
+  background-color: var(--bg-color-secondary);
+  border-bottom: 1px solid var(--border-color);
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--text-color-secondary);
+}
+
+.modelItem {
+  display: grid;
+  grid-template-columns: 3fr 2fr 1fr 1fr;
+  padding: 16px;
+  border-bottom: 1px solid var(--border-color);
+  align-items: center;
+  transition: background-color 0.2s ease;
+}
+
+.modelItem:last-child {
+  border-bottom: none;
+}
+
+.modelItem:hover {
+  background-color: var(--bg-color-hover);
+}
+
+.modelName {
+  font-weight: 500;
+}
+
+.modelProvider {
+  color: var(--text-color-secondary);
+  font-size: 14px;
+}
+
+.modelControls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Custom toggle switch */
+.toggleInput {
+  height: 0;
+  width: 0;
+  visibility: hidden;
+  position: absolute;
+}
+
+.toggleLabel {
+  cursor: pointer;
+  width: 36px;
+  height: 20px;
+  background: var(--toggle-bg-off);
+  display: block;
+  border-radius: 100px;
+  position: relative;
+  transition: 0.3s;
+}
+
+.toggleLabel:after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  background: var(--toggle-handle);
+  border-radius: 50%;
+  transition: 0.3s;
+}
+
+.toggleInput:checked + .toggleLabel {
+  background: var(--primary-color);
+}
+
+.toggleInput:checked + .toggleLabel:after {
+  left: calc(100% - 2px);
+  transform: translateX(-100%);
+}
+
+/* Custom radio button */
+.radioInput {
+  height: 0;
+  width: 0;
+  visibility: hidden;
+  position: absolute;
+}
+
+.radioLabel {
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  background: var(--radio-bg-off);
+  display: block;
+  border-radius: 50%;
+  position: relative;
+  border: 2px solid var(--border-color);
+  transition: 0.3s;
+}
+
+.radioInput:checked + .radioLabel {
+  border-color: var(--primary-color);
+}
+
+.radioInput:checked + .radioLabel:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  background: var(--primary-color);
+  border-radius: 50%;
+  transition: 0.3s;
+}
+
+.radioInput:disabled + .radioLabel {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.actions {
+  margin-top: 24px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.resetButton {
+  padding: 8px 16px;
+  background-color: transparent;
+  color: var(--danger-color);
+  border: 1px solid var(--danger-color);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.resetButton:hover {
+  background-color: var(--danger-color-faded);
+}
+
+@media (max-width: 600px) {
+  .modelHeader {
+    grid-template-columns: 2fr 1fr 0.8fr 0.8fr;
+    padding: 10px;
+    font-size: 12px;
+  }
+  
+  .modelItem {
+    grid-template-columns: 2fr 1fr 0.8fr 0.8fr;
+    padding: 12px 10px;
+  }
+  
+  .modelName {
+    font-size: 14px;
+  }
+  
+  .modelProvider {
+    font-size: 12px;
+  }
+  
+  .section h2 {
+    font-size: 18px;
+  }
+  
+  .backButton span {
+    display: none;
+  }
+} 

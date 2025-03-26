@@ -1,0 +1,25 @@
+.homepageContainer {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.homepageScrollContainer {
+  flex: 1;
+  padding-top: 4rem; /* This matches the header height */
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 768px) {
+  .homepageScrollContainer {
+    padding-top: 4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .homepageScrollContainer {
+    padding-top: 4rem;
+  }
+} 
+ 

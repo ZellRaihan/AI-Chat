@@ -1,0 +1,203 @@
+.header {
+  height: 60px;
+  min-height: 60px;
+  border-bottom: 1px solid var(--border-color);
+  background-color: var(--bg-color-secondary);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1.25rem;
+  position: relative;
+  z-index: 20;
+  width: 100%;
+}
+
+.header::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  right: 0;
+  height: 10px;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.05), transparent);
+  pointer-events: none;
+  z-index: 10;
+}
+
+.leftActions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-color);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.title i {
+  color: var(--primary-color);
+}
+
+.titleText {
+  white-space: nowrap;
+}
+
+.iconButton {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-color-secondary);
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.iconButton:hover {
+  background-color: var(--bg-color-hover);
+  color: var(--text-color);
+}
+
+.rightActions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.modelSelector {
+  display: flex;
+  align-items: center;
+}
+
+.modelButton {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  background-color: var(--bg-color-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: 0.5rem 0.75rem;
+  font-size: 0.9rem;
+  color: var(--text-color);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  min-width: 140px;
+}
+
+.modelButton:hover {
+  background-color: var(--bg-color-hover);
+  border-color: var(--primary-color);
+}
+
+.modelButton span {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.modelButton i:last-child {
+  font-size: 0.75rem;
+  color: var(--text-color-secondary);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .header {
+    padding: 0 0.75rem;
+    height: 56px;
+    min-height: 56px;
+    flex-wrap: nowrap;
+  }
+  
+  .title {
+    font-size: 1.1rem;
+    overflow: hidden;
+  }
+  
+  .titleText {
+    display: none;
+  }
+  
+  .iconButton {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+  }
+  
+  .modelButton {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.85rem;
+    min-width: auto;
+    max-width: 100px;
+  }
+  
+  .modelButton span i:first-child {
+    margin-right: 0.25rem;
+  }
+  
+  .modelButton span {
+    max-width: 70px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  .themeToggle,
+  .settingsIcon,
+  .iconButton {
+    width: 34px;
+    height: 34px;
+    min-width: 34px;
+  }
+  
+  .themeToggle {
+    font-size: 0.85rem;
+  }
+  
+  .settingsIcon {
+    font-size: 0.9rem;
+  }
+}
+
+.themeToggle {
+  composes: iconButton;
+  background-color: var(--bg-color-tertiary);
+  color: var(--text-color);
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.themeToggle:hover {
+  background-color: var(--primary-color);
+  color: white;
+  transform: rotate(15deg);
+}
+
+.lightIcon {
+  color: #fb923c; /* Orange for sun */
+}
+
+.darkIcon {
+  color: #818cf8; /* Purple for moon */
+}
+
+.settingsIcon {
+  composes: iconButton;
+  color: var(--text-color-secondary);
+}
+
+.settingsIcon:hover {
+  color: var(--primary-color);
+  transform: rotate(30deg);
+  transition: transform 0.3s ease;
+} 

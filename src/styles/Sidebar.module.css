@@ -1,0 +1,378 @@
+.sidebar {
+  width: 300px;
+  height: 100%;
+  background-color: var(--bg-color-secondary);
+  border-right: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  transition: width 0.3s ease;
+  overflow: hidden;
+}
+
+.sidebar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  backdrop-filter: blur(8px);
+  z-index: -1;
+}
+
+.sidebarHeader {
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.sidebarHeader h2 {
+  display: flex;
+  align-items: center;
+  font-size: 1.25rem;
+  margin: 0;
+  color: var(--text-color);
+}
+
+.sidebarHeader h2 i {
+  margin-right: 0.5rem;
+  color: var(--primary-color);
+}
+
+.newChatBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius);
+  padding: 0.5rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  width: 100%;
+}
+
+.newChatBtn:hover {
+  background-color: var(--primary-color-hover);
+}
+
+.chatList {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0.5rem;
+}
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: var(--text-color-secondary);
+  text-align: center;
+  padding: 1rem;
+}
+
+.emptyState i {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  opacity: 0.5;
+}
+
+.emptyState p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.chatItem {
+  display: flex;
+  align-items: flex-start;
+  padding: 0.75rem;
+  border-radius: var(--border-radius);
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.chatItem:hover {
+  background-color: var(--bg-color-hover);
+}
+
+.chatItem.active {
+  background-color: var(--bg-color-tertiary);
+}
+
+.chatIcon {
+  margin-right: 0.75rem;
+  font-size: 1rem;
+  color: var(--primary-color);
+  min-width: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chatInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.chatTitle {
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--text-color);
+}
+
+.chatDate {
+  font-size: 0.7rem;
+  color: var(--text-color-secondary);
+  margin-bottom: 0.25rem;
+}
+
+.chatPreview {
+  font-size: 0.8rem;
+  color: var(--text-color-secondary);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.deleteBtn {
+  background: none;
+  border: none;
+  color: var(--text-color-secondary);
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s, color 0.2s;
+  padding: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chatItem:hover .deleteBtn {
+  opacity: 0.7;
+}
+
+.deleteBtn:hover {
+  opacity: 1 !important;
+  color: var(--danger-color);
+}
+
+.sidebarFooter {
+  padding: 0.75rem 1rem;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
+.toggleSidebarBtn, 
+.actionBtn {
+  background-color: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  color: var(--text-color-secondary);
+  cursor: pointer;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--border-radius);
+  transition: all 0.2s;
+  width: 36px;
+  height: 36px;
+  position: relative;
+}
+
+.toggleSidebarBtn:hover,
+.actionBtn:hover {
+  background-color: var(--primary-color);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.toggleSidebarBtn:active,
+.actionBtn:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* Add tooltips for better UX */
+.actionBtn::after {
+  content: attr(title);
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+  z-index: 100;
+}
+
+.actionBtn:hover::after {
+  opacity: 1;
+}
+
+/* Collapsed state */
+.sidebar.collapsed {
+  width: 60px;
+  overflow: hidden;
+}
+
+.sidebar.collapsed .sidebarHeader h2 {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.sidebar.collapsed .sidebarHeader h2 i {
+  margin-right: 0;
+}
+
+.sidebar.collapsed .sidebarHeader h2 span,
+.sidebar.collapsed .newChatBtn span,
+.sidebar.collapsed .chatInfo,
+.sidebar.collapsed .deleteBtn {
+  display: none;
+}
+
+.sidebar.collapsed .sidebarHeader {
+  align-items: center;
+  padding: 1rem 0.5rem;
+}
+
+.sidebar.collapsed .chatItem {
+  justify-content: center;
+  padding: 0.75rem 0;
+}
+
+.sidebar.collapsed .chatIcon {
+  margin-right: 0;
+  font-size: 1.25rem;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.sidebar.collapsed .sidebarHeader h2 i {
+  margin-right: 0;
+  font-size: 1.25rem;
+}
+
+.sidebar.collapsed .newChatBtn i {
+  font-size: 1.25rem;
+}
+
+.sidebar.collapsed .sidebarFooter {
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.sidebar.collapsed .actionBtn {
+  margin-right: 0;
+}
+
+.sidebar.collapsed .newChatBtn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  padding: 0;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    z-index: 100;
+    left: -300px;
+    top: 0;
+    bottom: 0;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+    transition: left 0.3s ease;
+    width: 280px;
+  }
+  
+  /* When sidebar is open on mobile */
+  .sidebar:not(.collapsed) {
+    left: 0;
+  }
+  
+  /* When sidebar is collapsed/closed on mobile */
+  .sidebar.collapsed {
+    left: -300px;
+    width: 0;
+  }
+  
+  /* Make the header smaller for better mobile fit */
+  .sidebarHeader {
+    padding: 0.75rem;
+    gap: 0.5rem;
+  }
+  
+  .sidebarHeader h2 {
+    font-size: 1.1rem;
+  }
+  
+  /* Ensure content scrolls properly on mobile */
+  .chatList {
+    max-height: calc(100vh - 160px);
+    overflow-y: auto;
+  }
+  
+  .sidebar.collapsed {
+    width: 50px;
+  }
+  
+  .sidebar.collapsed .sidebarHeader {
+    padding: 0.75rem 0.25rem;
+  }
+  
+  .sidebar.collapsed .newChatBtn {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+/* Media queries */
+@media screen and (max-width: 992px) {
+  .sidebar {
+    position: fixed;
+    left: -300px;
+    top: 0;
+    bottom: 0;
+    z-index: 100;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+    transition: left 0.3s ease;
+  }
+  
+  .sidebar.active {
+    left: 0;
+  }
+  
+  .collapsed {
+    left: -60px;
+  }
+} 

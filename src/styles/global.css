@@ -1,0 +1,160 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+:root {
+  /* Base colors */
+  --primary-color: #8b5cf6;
+  --primary-color-hover: #7c3aed;
+  --danger-color: #ef4444;
+  
+  /* Light theme */
+  --bg-color: #ffffff;
+  --bg-color-secondary: #f9fafb;
+  --bg-color-tertiary: #f3f4f6;
+  --bg-color-hover: #f1f5f9;
+  
+  --text-color: #111827;
+  --text-color-secondary: #6b7280;
+  
+  --border-color: #e5e7eb;
+  --border-radius: 0.5rem;
+
+  /* Provider colors */
+  --openai-color: #19c37d;
+  --anthropic-color: #b355f6;
+  --google-color: #4285f4;
+  --meta-color: #0866ff;
+  --cohere-color: #7e57c2;
+  --error-color: #ef4444;
+
+  /* Other variables */
+  --header-height: 64px;
+  --sidebar-width: 300px;
+  --sidebar-width-collapsed: 60px;
+  --transition-speed: 0.3s;
+  --box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --box-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --box-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Dark theme colors */
+[data-theme="dark"] {
+  --bg-color: #0f1420;
+  --bg-color-secondary: #1e1e2d;
+  --bg-color-tertiary: #262637;
+  --bg-color-hover: #2a293d;
+  
+  --text-color: #f9fafb;
+  --text-color-secondary: #9ca3af;
+  
+  --border-color: #303050;
+  --box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.4), 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --box-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+  --box-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+  
+  /* Dark theme input specific colors */
+  --input-bg: #1e1e2d;
+  --input-border: rgba(255, 255, 255, 0.1);
+  --input-text: #f9fafb;
+  --input-placeholder: rgba(255, 255, 255, 0.4);
+  --button-bg: rgba(255, 255, 255, 0.05);
+  --button-color: rgba(255, 255, 255, 0.7);
+  --button-hover-bg: rgba(255, 255, 255, 0.1);
+  --button-hover-color: white;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  max-width: 100vw;
+  height: 100%;
+  overflow-x: hidden;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  color: var(--text-color);
+  background-color: var(--bg-color);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+#__next, main {
+  height: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInUp {
+  from { transform: translateY(10px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.4);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 10px rgba(139, 92, 246, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(139, 92, 246, 0);
+  }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  :root {
+    --sidebar-width: 100%;
+    --header-height: 56px;
+  }
+} 

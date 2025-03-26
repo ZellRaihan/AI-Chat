@@ -1,0 +1,65 @@
+# AI-Chats.net robots.txt
+
+# Allow all robots complete access
+User-agent: *
+Allow: /
+
+# Disallow admin and API routes
+Disallow: /api/
+Disallow: /admin/
+Disallow: /_next/
+Disallow: /static/debug/
+Disallow: /server/
+Disallow: /private/
+
+# Disallow query parameters for specific paths
+Disallow: /*?ref=
+Disallow: /*?source=
+Disallow: /*?utm_*
+
+# Allow CSS, JS, and Images
+Allow: /*.css$
+Allow: /*.js$
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.gif$
+Allow: /*.svg$
+Allow: /*.ico$
+Allow: /*.woff$
+Allow: /*.woff2$
+
+# Crawl delays and rate limiting
+Crawl-delay: 1
+
+# Sitemaps
+Sitemap: https://ai-chats.net/sitemap.xml
+
+# Special rules for major bots
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: DuckDuckBot
+Allow: /
+Crawl-delay: 1
+
+# Block AI training bots
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: / 
