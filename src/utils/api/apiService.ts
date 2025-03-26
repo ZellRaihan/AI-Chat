@@ -225,7 +225,10 @@ async function callGeminiAPI(modelId: string, messages: ChatMessage[], apiKey: s
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          contents: formattedMessages,
+          contents: [{
+            role: 'user',
+            parts: [{ text: messages[messages.length - 1].content }]
+          }],
           generationConfig: {
             temperature: 0.7,
             maxOutputTokens: 1024,

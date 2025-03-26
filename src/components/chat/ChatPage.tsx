@@ -350,7 +350,7 @@ const ChatPage = ({ initialMessage }: ChatPageProps) => {
       const errorMessage: Message = {
         id: `error-${Date.now().toString()}`,  // Unique ID for error messages
         role: 'assistant',
-        content: `I'm sorry, I encountered an error while processing your request. Please try again or select a different model.`,
+        content: `I'm sorry, I encountered an error while processing your request: ${error instanceof Error ? error.message : 'Unknown error'}. Please try again or select a different model.`,
         timestamp: new Date().toISOString(),
         provider: 'error'
       };
