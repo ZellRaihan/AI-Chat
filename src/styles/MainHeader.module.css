@@ -1,252 +1,181 @@
 .header {
-  width: 100%;
-  background-color: var(--bg-color);
-  border-bottom: 1px solid var(--border-color);
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 100;
-  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.05);
-  flex-shrink: 0; /* Prevent header from shrinking */
+  background-color: var(--bg-color-secondary);
+  border-bottom: 1px solid var(--border-color);
+  backdrop-filter: blur(10px);
 }
 
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 1.5rem;
-  width: 100%;
+  padding: 0 1rem;
 }
 
 .navbar {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  height: 4rem;
+  justify-content: space-between;
+  height: 64px;
+  position: relative;
 }
 
 .logoContainer {
   display: flex;
   align-items: center;
-  z-index: 101;
 }
 
 .logoLink {
-  display: flex;
-  align-items: center;
   text-decoration: none;
-}
-
-.logo {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--primary-color);
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
 
-.logo i {
-  font-size: 1.25rem;
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #8b5cf6, #6366f1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .navigation {
   display: flex;
+  align-items: center;
   gap: 2rem;
 }
 
 .navLink {
-  font-weight: 500;
   color: var(--text-color-secondary);
   text-decoration: none;
-  transition: color 0.2s ease;
-  font-size: 1rem;
-  position: relative;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: color 0.2s;
 }
 
 .navLink:hover {
-  color: var(--primary-color);
-}
-
-.navLink:hover::after {
-  content: '';
-  position: absolute;
-  bottom: -5px;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background-color: var(--primary-color);
-  transform: scaleX(1);
-  transition: transform 0.3s ease;
+  color: var(--text-color);
 }
 
 .authButtons {
   display: flex;
   align-items: center;
   gap: 1rem;
-  z-index: 101;
 }
 
 .themeToggle {
-  background: none;
-  border: none;
-  color: var(--text-color-secondary);
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
+  background: transparent;
+  border: none;
+  color: var(--text-color-secondary);
   cursor: pointer;
-  transition: all 0.3s ease;
-  background-color: var(--bg-color-secondary);
+  transition: all 0.2s;
 }
 
 .themeToggle:hover {
-  background-color: var(--primary-color);
-  color: white;
+  background-color: var(--bg-color-hover);
+  color: var(--text-color);
   transform: rotate(15deg);
 }
 
-.lightIcon {
-  color: #fb923c; /* Orange for sun */
-  font-size: 1.1rem;
-}
-
-.darkIcon {
-  color: #818cf8; /* Purple for moon */
-  font-size: 1.1rem;
-}
-
-.loginButton {
-  padding: 0.5rem 1rem;
-  border-radius: var(--border-radius);
-  color: var(--text-color);
-  font-weight: 500;
-  text-decoration: none;
-  transition: background-color 0.2s, color 0.2s;
-}
-
-.loginButton:hover {
-  background-color: var(--bg-color-tertiary);
-}
-
-.signupButton {
+.startButton {
   padding: 0.5rem 1.25rem;
-  background-color: var(--primary-color);
-  color: white;
   border-radius: var(--border-radius);
+  background: linear-gradient(135deg, #8b5cf6, #6366f1);
+  color: white;
   font-weight: 500;
   text-decoration: none;
   transition: all 0.2s;
-  box-shadow: 0 2px 8px rgba(var(--primary-rgb), 0.3);
 }
 
-.signupButton:hover {
-  background-color: var(--primary-color-hover);
+.startButton:hover {
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.4);
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.25);
 }
 
 .mobileMenuButton {
   display: none;
-  background: none;
-  border: none;
-  color: var(--text-color-secondary);
-  font-size: 1.25rem;
-  cursor: pointer;
-  z-index: 101;
-}
-
-.mobileMenuButton button {
-  background: none;
-  border: none;
-  width: 40px;
-  height: 40px;
-  display: flex;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
   align-items: center;
   justify-content: center;
-  color: var(--text-color);
+  background: transparent;
+  border: none;
+  color: var(--text-color-secondary);
   cursor: pointer;
-  border-radius: 50%;
-  transition: background-color 0.2s;
+  transition: all 0.2s;
 }
 
-.mobileMenuButton button:hover {
-  background-color: var(--bg-color-tertiary);
+.mobileMenuButton:hover {
+  background-color: var(--bg-color-hover);
+  color: var(--text-color);
 }
 
-@media (max-width: 992px) {
-  .navigation {
-    gap: 1.5rem;
-  }
-  
-  .authButtons {
-    gap: 0.75rem;
-  }
+.mobileMenuButton.mobileMenuOpen {
+  color: var(--primary-color);
+  background-color: var(--bg-color-hover);
 }
 
 @media (max-width: 768px) {
   .navigation {
     display: none;
-    position: fixed;
-    top: 0;
+    position: absolute;
+    top: 100%;
     left: 0;
     right: 0;
-    bottom: 0;
-    background-color: var(--bg-color);
+    background-color: var(--bg-color-secondary);
+    padding: 1rem;
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
     flex-direction: column;
-    padding: 5rem 1.5rem 1.5rem;
-    gap: 1.5rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    align-items: center;
-    justify-content: flex-start;
-    z-index: 100;
+    gap: 1rem;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   }
-  
-  .navigation.mobileOpen {
+
+  .navigation.mobileMenuOpen {
     display: flex;
-    animation: fadeIn 0.3s ease forwards;
+    animation: slideDown 0.2s ease-out;
   }
-  
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
-  
+
   .navLink {
-    padding: 0.75rem 0;
+    padding: 0.5rem 0;
     width: 100%;
     text-align: center;
-    font-size: 1.25rem;
-    border-bottom: 1px solid var(--border-color-light, rgba(0,0,0,0.05));
-  }
-  
-  .authButtons .loginButton {
-    display: none;
+    font-size: 1.1rem;
   }
   
   .mobileMenuButton {
-    display: block;
+    display: flex;
   }
   
-  .signupButton {
-    padding: 0.45rem 1rem;
+  .authButtons {
+    gap: 0.5rem;
+  }
+  
+  .startButton {
+    padding: 0.5rem 1rem;
     font-size: 0.9rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .container {
-    padding: 0 1rem;
-  }
-  
-  .logo {
-    font-size: 1.25rem;
-  }
-  
-  .signupButton {
-    padding: 0.4rem 0.9rem;
-    font-size: 0.85rem;
   }
 } 

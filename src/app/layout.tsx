@@ -7,6 +7,10 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 
 const inter = Inter({ subsets: ["latin"] });
 
+// Configure next-head-count
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
@@ -20,14 +24,29 @@ export const viewport: Viewport = {
   ]
 };
 
+// Base metadata configuration
 export const metadata: Metadata = {
-  title: 'AI Chat - Intelligent Conversations with Advanced AI',
+  metadataBase: new URL('https://ai-chats.net'),
+  title: {
+    default: 'AI Chat - Intelligent Conversations with Advanced AI',
+    template: '%s | AI Chat'
+  },
   description: 'Experience intelligent conversations with our advanced AI chat platform. Get instant, accurate responses powered by cutting-edge language models.',
-  keywords: 'AI chat, artificial intelligence, chatbot, GPT, Claude, AI assistant, intelligent conversations',
+  keywords: ['AI chat', 'artificial intelligence', 'chatbot', 'GPT', 'Claude', 'AI assistant', 'intelligent conversations'],
   authors: [{ name: 'AI Chat Team' }],
   creator: 'AI Chat Team',
   publisher: 'AI Chat',
-  robots: 'index, follow',
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
   alternates: {
     canonical: 'https://ai-chats.net',
     languages: {
@@ -79,6 +98,10 @@ export const metadata: Metadata = {
   formatDetection: {
     telephone: false,
   },
+  category: 'technology',
+  classification: 'business',
+  referrer: 'origin-when-cross-origin',
+  colorScheme: 'dark light',
 };
 
 export default function RootLayout({

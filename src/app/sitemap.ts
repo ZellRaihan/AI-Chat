@@ -5,19 +5,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
   
   // Add all your static pages here
   const routes = [
-    '',
+    '', // Home page
+    '/chat', // Main chat interface
     '/about',
     '/contact',
     '/privacy-policy',
     '/terms',
     '/disclaimer',
-    '/chat',
-    '/features',
+    '/settings',
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date().toISOString(),
-    changeFrequency: 'weekly' as const,
-    priority: route === '' ? 1 : 0.8,
+    changeFrequency: route === '' || route === '/chat' ? 'daily' : 'weekly' as MetadataRoute.Sitemap[number]['changeFrequency'],
+    priority: route === '' ? 1 : route === '/chat' ? 0.9 : 0.8,
   }));
 
   return routes;

@@ -1,12 +1,17 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import styles from '@/styles/MainHeader.module.css';
 import { useTheme } from './ThemeProvider';
 
 const MainHeader = () => {
   const { theme, toggleTheme } = useTheme();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
   
   return (
     <header className={styles.header}>
@@ -18,15 +23,9 @@ const MainHeader = () => {
             </Link>
           </div>
           
-          <div className={styles.navigation}>
+          <div className={`${styles.navigation} ${isMobileMenuOpen ? styles.mobileMenuOpen : ''}`}>
             <Link href="/features" className={styles.navLink}>
               Features
-            </Link>
-            <Link href="/pricing" className={styles.navLink}>
-              Pricing
-            </Link>
-            <Link href="/documentation" className={styles.navLink}>
-              Docs
             </Link>
             <Link href="/settings" className={styles.navLink}>
               Settings
@@ -36,21 +35,22 @@ const MainHeader = () => {
           <div className={styles.authButtons}>
             <button onClick={toggleTheme} className={styles.themeToggle}>
               {theme === 'dark' ? (
-                <i className="fa fa-sun-o"></i>
+                <i className="fas fa-sun"></i>
               ) : (
-                <i className="fa fa-moon-o"></i>
+                <i className="fas fa-moon"></i>
               )}
             </button>
-            <Link href="/login" className={styles.loginButton}>
-              Login
-            </Link>
-            <Link href="/chat" className={styles.signupButton}>
-              Try Now
+            <Link href="/chat" className={styles.startButton}>
+              Start Chatting
             </Link>
           </div>
           
-          <button className={styles.mobileMenuButton}>
-            <i className="fa fa-bars"></i>
+          <button 
+            className={`${styles.mobileMenuButton} ${isMobileMenuOpen ? styles.mobileMenuOpen : ''}`}
+            onClick={toggleMobileMenu}
+            aria-label="Toggle mobile menu"
+          >
+            <i className={`fas ${isMobileMenuOpen ? 'fa-times' : 'fa-bars'}`}></i>
           </button>
         </nav>
       </div>

@@ -1,17 +1,25 @@
 # AI Chat Application
 
-A modern AI chat application built with Next.js that provides intelligent conversations powered by various AI models including GPT-4, Claude, and Gemini.
+A modern AI chat application built with Next.js that provides intelligent conversations powered by various AI models including GPT-4, Claude, and Gemini. Start chatting instantly - no signup required!
 
 ## Features
 
-- 🤖 Multiple AI Models Support (GPT-4, Claude, Gemini)
-- 🚀 No Sign-up Required
+- 🤖 Multiple AI Models Support
+  - Azure OpenAI GPT-4
+  - DeepSeek-R1
+  - Llama-3.3-70B
+- 🚀 Free & No Sign-up Required
 - 💨 Instant Responses
 - 🎨 Beautiful Modern UI
 - 📱 Fully Responsive Design
 - 🌙 Dark/Light Theme
 - 🔒 Privacy Focused
 - 🌐 SEO Optimized
+  - Dynamic Meta Tags
+  - OpenGraph Support
+  - Twitter Cards
+  - Sitemap Generation
+  - Robots.txt Configuration
 
 ## Tech Stack
 
@@ -19,6 +27,7 @@ A modern AI chat application built with Next.js that provides intelligent conver
 - React 19
 - TypeScript
 - CSS Modules
+- Tailwind CSS
 - Various AI APIs (OpenAI, Anthropic, Google)
 
 ## Getting Started
@@ -48,6 +57,16 @@ A modern AI chat application built with Next.js that provides intelligent conver
    ```
 
 5. Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+## SEO Features
+
+- Dynamic metadata for all pages
+- Model-specific meta tags for chat pages
+- Optimized sitemap with proper priorities
+- Comprehensive robots.txt configuration
+- Social media sharing optimization
+- Mobile-friendly meta tags
+- Proper canonical URLs
 
 ## Deployment
 
