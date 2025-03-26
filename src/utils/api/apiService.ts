@@ -136,8 +136,15 @@ export async function getAIResponse(options: AIRequestOptions): Promise<AIRespon
     
     // Check if API key is available
     const apiKey = API_KEYS[modelConfig.apiConfigKey];
+    console.log(`Checking API key for ${modelConfig.provider}:`, {
+      provider: modelConfig.provider,
+      modelId,
+      apiKeyExists: !!apiKey,
+      apiKeyLength: apiKey?.length || 0
+    });
+    
     if (!apiKey || apiKey.trim() === '') {
-      console.log(`No API key available for ${modelConfig.provider}. Trying to find an alternative model.`);
+      console.warn(`No API key available for ${modelConfig.provider}. Trying to find an alternative model.`);
       
       // Try to find a model with an available API key
       const availableModel = findAvailableModel();
@@ -154,6 +161,11 @@ export async function getAIResponse(options: AIRequestOptions): Promise<AIRespon
     
     switch (modelConfig.provider) {
       case 'Google':
+        console.log('Calling Gemini API with config:', {
+          modelId,
+          messageCount: messages.length,
+          apiKeyLength: apiKey.length
+        });
         responsePromise = callGeminiAPI(modelId, messages, apiKey);
         break;
       case 'OpenAI':
@@ -185,7 +197,12 @@ export async function getAIResponse(options: AIRequestOptions): Promise<AIRespon
     return await ensureMinimumDelay(responsePromise, 1500);
     
   } catch (error) {
-    console.error(`Error in AI response:`, error);
+    console.error(`Error in AI response:`, {
+      error,
+      modelId,
+      messageCount: messages.length,
+      provider: MODEL_CONFIGS[modelId]?.provider
+    });
     
     // Try to find a different model with an available API key
     const availableModels = Object.entries(MODEL_CONFIGS)
@@ -212,17 +229,33 @@ export async function getAIResponse(options: AIRequestOptions): Promise<AIRespon
  */
 async function callGeminiAPI(modelId: string, messages: ChatMessage[], apiKey: string): Promise<AIResponse> {
   try {
+    console.log('Initializing Gemini API with model:', modelId);
+    
     // Initialize the Google GenAI client
     const genAI = new GoogleGenerativeAI(apiKey);
+    console.log('API Key length:', apiKey?.length || 0);
+    
+    // Get the model
     const model = genAI.getGenerativeModel({ model: modelId });
+    
+    // Start a chat
+    const chat = model.startChat({
+      history: messages.map(msg => ({
+        role: msg.role === 'assistant' ? 'model' : 'user',
+        parts: [{ text: msg.content }]
+      }))
+    });
 
     // Get the latest user message
     const latestMessage = messages[messages.length - 1];
+    console.log('Sending message to Gemini:', latestMessage.content);
     
     // Generate content
-    const result = await model.generateContent(latestMessage.content);
+    const result = await chat.sendMessage(latestMessage.content);
     const response = await result.response;
     const text = response.text();
+    
+    console.log('Received response from Gemini:', text.substring(0, 100) + '...');
     
     return {
       content: text,
@@ -230,7 +263,12 @@ async function callGeminiAPI(modelId: string, messages: ChatMessage[], apiKey: s
       provider: 'Google',
     };
   } catch (error) {
-    console.error("Error in Gemini API call:", error);
+    console.error("Error in Gemini API call:", {
+      error,
+      modelId,
+      messageCount: messages.length,
+      apiKeyExists: !!apiKey
+    });
     throw error; // Rethrow to allow main function to handle fallback
   }
 }
