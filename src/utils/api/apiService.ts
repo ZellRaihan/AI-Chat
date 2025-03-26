@@ -211,9 +211,6 @@ export async function getAIResponse(options: AIRequestOptions): Promise<AIRespon
  */
 async function callGeminiAPI(modelId: string, messages: ChatMessage[], apiKey: string): Promise<AIResponse> {
   try {
-    // Specific model to use (gemini-pro is default)
-    const geminiModel = modelId === 'gemini-1.5-flash' ? 'gemini-1.5-flash' : 'gemini-pro';
-    
     // Format messages for Gemini API
     const formattedMessages = messages.map(msg => ({
       role: msg.role === 'assistant' ? 'model' : msg.role,
@@ -221,7 +218,7 @@ async function callGeminiAPI(modelId: string, messages: ChatMessage[], apiKey: s
     }));
     
     const response = await fetch(
-      `${API_ENDPOINTS.GEMINI}/${geminiModel}:generateContent?key=${apiKey}`,
+      `${API_ENDPOINTS.GEMINI}/${modelId}:generateContent?key=${apiKey}`,
       {
         method: 'POST',
         headers: {
@@ -252,7 +249,7 @@ async function callGeminiAPI(modelId: string, messages: ChatMessage[], apiKey: s
     
     return {
       content,
-      model: geminiModel,
+      model: modelId,
       provider: 'Google',
     };
   } catch (error) {
