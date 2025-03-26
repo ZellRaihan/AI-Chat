@@ -1,12 +1,20 @@
-'use client';
-
+import React from 'react';
 import Link from 'next/link';
 import styles from '@/styles/NotFound.module.css';
 import MainLayout from '@/components/MainLayout';
+import type { Metadata } from 'next';
 
-export const metadata = {
-  title: 'Page Not Found | AI-Chats.net',
+export const metadata: Metadata = {
+  title: '404: Page Not Found | AI-Chats.net',
   description: 'The page you are looking for could not be found. Please check the URL or return to the homepage.',
+  openGraph: {
+    title: '404: Page Not Found | AI-Chats.net',
+    description: 'The page you are looking for could not be found. Please check the URL or return to the homepage.',
+  },
+  twitter: {
+    title: '404: Page Not Found | AI-Chats.net',
+    description: 'The page you are looking for could not be found. Please check the URL or return to the homepage.',
+  }
 };
 
 export default function NotFound() {
@@ -14,40 +22,22 @@ export default function NotFound() {
     <MainLayout>
       <div className={styles.notFoundContainer}>
         <div className={styles.content}>
-          <div className={styles.errorCode}>
-            <span className={styles.four}>4</span>
-            <div className={styles.zeroContainer}>
-              <div className={styles.zero}>0</div>
-            </div>
-            <span className={styles.four}>4</span>
-          </div>
-          
-          <h1 className={styles.title}>Page Not Found</h1>
+          <h1 className={styles.title}>404</h1>
+          <h2 className={styles.subtitle}>Page Not Found</h2>
           <p className={styles.description}>
-            Oops! The page you're looking for seems to have vanished into thin air.
-            Let's get you back on track!
+            The page you are looking for might have been removed, had its name changed,
+            or is temporarily unavailable.
           </p>
 
-          <div className={styles.navigation}>
-            <h2 className={styles.navTitle}>Here are some helpful links:</h2>
-            <div className={styles.navLinks}>
-              <Link href="/" className={styles.navLink}>
-                <i className="fas fa-home"></i>
-                Homepage
-              </Link>
-              <Link href="/chat" className={styles.navLink}>
-                <i className="fas fa-comments"></i>
-                Start Chatting
-              </Link>
-              <Link href="/features" className={styles.navLink}>
-                <i className="fas fa-star"></i>
-                Features
-              </Link>
-              <Link href="/contact" className={styles.navLink}>
-                <i className="fas fa-envelope"></i>
-                Contact Us
-              </Link>
-            </div>
+          <div className={styles.actions}>
+            <Link href="/" className={styles.homeButton}>
+              <i className="fas fa-home"></i>
+              Return Home
+            </Link>
+            <Link href="/contact" className={styles.contactButton}>
+              <i className="fas fa-envelope"></i>
+              Contact Support
+            </Link>
           </div>
 
           <div className={styles.searchSection}>

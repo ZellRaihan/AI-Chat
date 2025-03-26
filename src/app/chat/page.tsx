@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
-import ChatPage from '@/components/chat/ChatPage';
+import ChatPageComponent from '@/components/chat/ChatPage';
 
 export default function Page() {
   const searchParams = useSearchParams();
@@ -31,5 +31,5 @@ export default function Page() {
     }
   }, [message, prompt, messageProcessed]);
 
-  return <ChatPage initialMessage={initialMessage} />;
+  return <ChatPageComponent initialMessage={initialMessage} />;
 } 
