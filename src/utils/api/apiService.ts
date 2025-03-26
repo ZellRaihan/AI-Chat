@@ -211,14 +211,11 @@ export async function getAIResponse(options: AIRequestOptions): Promise<AIRespon
  */
 async function callGeminiAPI(modelId: string, messages: ChatMessage[], apiKey: string): Promise<AIResponse> {
   try {
-    // Format messages for Gemini API
-    const formattedMessages = messages.map(msg => ({
-      role: msg.role === 'assistant' ? 'model' : msg.role,
-      parts: [{ text: msg.content }]
-    }));
+    // Get the latest user message
+    const latestMessage = messages[messages.length - 1];
     
     const response = await fetch(
-      `${API_ENDPOINTS.GEMINI}/${modelId}:generateContent?key=${apiKey}`,
+      `${API_ENDPOINTS.GEMINI}/models/${modelId}:generateContent?key=${apiKey}`,
       {
         method: 'POST',
         headers: {
@@ -226,8 +223,7 @@ async function callGeminiAPI(modelId: string, messages: ChatMessage[], apiKey: s
         },
         body: JSON.stringify({
           contents: [{
-            role: 'user',
-            parts: [{ text: messages[messages.length - 1].content }]
+            parts: [{ text: latestMessage.content }]
           }],
           generationConfig: {
             temperature: 0.7,
