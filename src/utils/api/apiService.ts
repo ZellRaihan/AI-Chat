@@ -1,4 +1,5 @@
 import { API_KEYS, API_ENDPOINTS, MODEL_CONFIGS } from './apiConfig';
+import { GoogleGenerativeAI } from '@google/generative-ai';
 
 // Interface for chat message
 export interface ChatMessage {
@@ -211,43 +212,20 @@ export async function getAIResponse(options: AIRequestOptions): Promise<AIRespon
  */
 async function callGeminiAPI(modelId: string, messages: ChatMessage[], apiKey: string): Promise<AIResponse> {
   try {
+    // Initialize the Google GenAI client
+    const genAI = new GoogleGenerativeAI(apiKey);
+    const model = genAI.getGenerativeModel({ model: modelId });
+
     // Get the latest user message
     const latestMessage = messages[messages.length - 1];
     
-    const response = await fetch(
-      `${API_ENDPOINTS.GEMINI}/models/${modelId}:generateContent?key=${apiKey}`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          contents: [{
-            parts: [{ text: latestMessage.content }]
-          }],
-          generationConfig: {
-            temperature: 0.7,
-            maxOutputTokens: 1024,
-          },
-        }),
-      }
-    );
-    
-    if (!response.ok) {
-      const error = await response.text();
-      throw new Error(`Gemini API error: ${error}`);
-    }
-    
-    const data = await response.json();
-    
-    if (!data.candidates || data.candidates.length === 0) {
-      throw new Error('No response from Gemini API');
-    }
-    
-    const content = data.candidates[0]?.content?.parts?.[0]?.text || '';
+    // Generate content
+    const result = await model.generateContent(latestMessage.content);
+    const response = await result.response;
+    const text = response.text();
     
     return {
-      content,
+      content: text,
       model: modelId,
       provider: 'Google',
     };

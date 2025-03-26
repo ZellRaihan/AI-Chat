@@ -12,7 +12,6 @@ export const API_KEYS = {
 
 // API endpoints
 export const API_ENDPOINTS = {
-  GEMINI: 'https://generativelanguage.googleapis.com/v1/models',
   OPENAI: 'https://api.openai.com/v1/chat/completions',
   ANTHROPIC: 'https://api.anthropic.com/v1/messages',
   COHERE: 'https://api.cohere.ai/v1/generate',
