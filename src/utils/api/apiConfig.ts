@@ -6,18 +6,14 @@ export const API_KEYS = {
 // API endpoints
 export const API_ENDPOINTS = {
   GITHUB: 'https://models.inference.ai.azure.com',
-  OPENAI: 'https://api.openai.com/v1/chat/completions',
-  ANTHROPIC: 'https://api.anthropic.com/v1/messages',
-  COHERE: 'https://api.cohere.ai/v1/generate',
-  DEEPSEEK: 'https://api.deepseek.com/v1/chat/completions',
-  META: 'https://llama-api.meta.com/v1/completions',
-  ALIBABA: 'https://dashscope.aliyuncs.com/api/v1/services/aigc/text-generation/generation',
-  XAI: 'https://api.grok.x.ai/v1/chat/completions'
 };
 
 // Provider names
 export const PROVIDERS = {
   GITHUB: 'GitHub',
+  OPENAI: 'OpenAI',
+  DEEPSEEK: 'DeepSeek',
+  META: 'Meta'
 };
 
 // Model configurations
@@ -29,31 +25,44 @@ export interface ModelConfig {
   maxTokens?: number;
   temperature?: number;
   top_p?: number;
+  contextWindow?: number;
+  capabilities?: string[];
 }
 
 // Model configurations mapping
 export const MODEL_CONFIGS: Record<string, ModelConfig> = {
+  // OpenAI GPT-4o Model
   'gpt-4o': { 
     id: 'gpt-4o', 
-    name: 'GitHub GPT-4', 
-    provider: PROVIDERS.GITHUB, 
+    name: 'Azure OpenAI GPT-4o', 
+    provider: PROVIDERS.OPENAI, 
     apiConfigKey: 'GITHUB',
     maxTokens: 4096,
     temperature: 1,
-    top_p: 1
+    top_p: 1,
+    contextWindow: 8192,
+    capabilities: ['chat', 'completion', 'function-calling', 'vision']
   },
-  'gpt-3.5-turbo': { 
-    id: 'gpt-3.5-turbo', 
-    name: 'GitHub GPT-3.5', 
-    provider: PROVIDERS.GITHUB, 
+
+  // DeepSeek-R1 Model
+  'deepseek-r1': {
+    id: 'deepseek-r1',
+    name: 'DeepSeek-R1',
+    provider: PROVIDERS.DEEPSEEK,
     apiConfigKey: 'GITHUB',
-    maxTokens: 4096
+    maxTokens: 4096,
+    contextWindow: 4096,
+    capabilities: ['chat', 'completion', 'reasoning', 'code-generation']
   },
-  'claude-3-opus': { 
-    id: 'claude-3-opus', 
-    name: 'GitHub Claude 3', 
-    provider: PROVIDERS.GITHUB, 
+
+  // Llama-3.3-70B-Instruct Model
+  'llama-3.3-70b-instruct': {
+    id: 'llama-3.3-70b-instruct',
+    name: 'Llama-3.3-70B-Instruct',
+    provider: PROVIDERS.META,
     apiConfigKey: 'GITHUB',
-    maxTokens: 4096
-  },
+    maxTokens: 4096,
+    contextWindow: 4096,
+    capabilities: ['chat', 'completion', 'reasoning', 'math', 'instruction-following']
+  }
 }; 

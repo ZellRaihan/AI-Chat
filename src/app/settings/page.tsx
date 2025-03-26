@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import styles from '@/styles/Settings.module.css';
 import { useTheme } from '@/components/ThemeProvider';
-import { getFromStorage, setToStorage } from '../../utils/storageUtils';
+import { getFromStorage, setToStorage, clearStorage } from '../../utils/storageUtils';
 
 interface Model {
   id: string;
@@ -18,14 +18,9 @@ interface Model {
 const STORAGE_KEY = 'ai-chat-app-models';
 
 const defaultModels: Model[] = [
-  { id: 'gpt-4o', name: 'GPT-4o', provider: 'OpenAI', isEnabled: true, isDefault: true },
-  { id: 'gpt-4', name: 'GPT-4', provider: 'OpenAI', isEnabled: true, isDefault: false },
-  { id: 'gpt-3.5-turbo', name: 'GPT-3.5 Turbo', provider: 'OpenAI', isEnabled: true, isDefault: false },
-  { id: 'claude-3-opus', name: 'Claude 3 Opus', provider: 'Anthropic', isEnabled: true, isDefault: false },
-  { id: 'claude-3-sonnet', name: 'Claude 3 Sonnet', provider: 'Anthropic', isEnabled: true, isDefault: false },
-  { id: 'claude-3-haiku', name: 'Claude 3 Haiku', provider: 'Anthropic', isEnabled: true, isDefault: false },
-  { id: 'gemini-pro', name: 'Gemini Pro', provider: 'Google', isEnabled: true, isDefault: false },
-  { id: 'llama-3-70b', name: 'Llama 3 70B', provider: 'Meta', isEnabled: true, isDefault: false },
+  { id: 'gpt-4o', name: 'Azure OpenAI GPT-4o', provider: 'OpenAI', isEnabled: true, isDefault: true },
+  { id: 'deepseek-r1', name: 'DeepSeek-R1', provider: 'DeepSeek', isEnabled: true, isDefault: false },
+  { id: 'llama-3.3-70b-instruct', name: 'Llama-3.3-70B-Instruct', provider: 'Meta', isEnabled: true, isDefault: false }
 ];
 
 export default function SettingsPage() {
@@ -36,9 +31,13 @@ export default function SettingsPage() {
   
   // Load models from localStorage on component mount
   useEffect(() => {
-    // Use storage utility to safely load models
-    const savedModels = getFromStorage<Model[]>(STORAGE_KEY, defaultModels);
+    // Clear existing models to force reset
+    clearStorage(STORAGE_KEY);
+    
+    // Set new models configuration
+    const savedModels = defaultModels;
     setModels(savedModels);
+    setToStorage(STORAGE_KEY, savedModels);
     setInitialized(true);
   }, []);
   

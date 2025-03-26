@@ -20,11 +20,9 @@ export const getFromStorage = <T>(key: string, defaultValue: T): T => {
   
   try {
     const item = localStorage.getItem(key);
-    if (!item) return defaultValue;
-    
-    return JSON.parse(item) as T;
+    return item ? JSON.parse(item) : defaultValue;
   } catch (error) {
-    console.error(`Error reading from localStorage: ${key}`, error);
+    console.error(`Error reading from localStorage: ${error}`);
     return defaultValue;
   }
 };
@@ -44,7 +42,7 @@ export const setToStorage = <T>(key: string, value: T): boolean => {
     localStorage.setItem(key, JSON.stringify(value));
     return true;
   } catch (error) {
-    console.error(`Error writing to localStorage: ${key}`, error);
+    console.error(`Error writing to localStorage: ${error}`);
     
     // Attempt to handle quota exceeded errors by removing some items
     if (error instanceof DOMException && 
@@ -125,4 +123,10 @@ const cleanupOldestStorageItems = (count: number): void => {
   }
   
   keysToRemove.forEach(key => localStorage.removeItem(key));
+};
+
+export const clearStorage = (key: string) => {
+  if (typeof window !== 'undefined') {
+    localStorage.removeItem(key);
+  }
 }; 

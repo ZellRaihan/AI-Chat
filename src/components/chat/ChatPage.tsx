@@ -10,7 +10,7 @@ import { useTheme } from '@/components/ThemeProvider';
 import styles from '@/styles/ChatPage.module.css';
 import { generateChatId } from '@/utils/chatUtils';
 import { getAIResponse, ChatMessage as APIChatMessage } from '@/utils/api/apiService';
-import { getFromStorage, setToStorage } from '../../utils/storageUtils';
+import { getFromStorage, setToStorage, clearStorage } from '../../utils/storageUtils';
 
 // Match the Chat interface expected by Sidebar
 interface Chat {
@@ -46,14 +46,11 @@ interface ChatPageProps {
 const STORAGE_KEY = 'ai-chat-app-data';
 const MODELS_STORAGE_KEY = 'ai-chat-app-models';
 
-const defaultModels: Model[] = [
-  { id: 'gemini-pro', name: 'Gemini Pro', provider: 'Google', isEnabled: true, isDefault: true },
-  { id: 'gpt-3.5-turbo', name: 'GPT-3.5 Turbo', provider: 'OpenAI', isEnabled: true, isDefault: false },
-  { id: 'claude-3-opus', name: 'Claude 3 Opus', provider: 'Anthropic', isEnabled: true, isDefault: false },
-  { id: 'claude-3-sonnet', name: 'Claude 3 Sonnet', provider: 'Anthropic', isEnabled: true, isDefault: false },
-  { id: 'claude-3-haiku', name: 'Claude 3 Haiku', provider: 'Anthropic', isEnabled: true, isDefault: false },
-  { id: 'llama-3-70b', name: 'Llama 3 70B', provider: 'Meta', isEnabled: true, isDefault: false },
-  { id: 'command-r', name: 'Command R', provider: 'Cohere', isEnabled: true, isDefault: false },
+// Default models configuration
+const defaultModels = [
+  { id: 'gpt-4o', name: 'Azure OpenAI GPT-4o', provider: 'OpenAI' },
+  { id: 'deepseek-r1', name: 'DeepSeek-R1', provider: 'DeepSeek' },
+  { id: 'llama-3.3-70b-instruct', name: 'Llama-3.3-70B-Instruct', provider: 'Meta' }
 ];
 
 const ChatPage = ({ initialMessage }: ChatPageProps) => {
@@ -61,7 +58,7 @@ const ChatPage = ({ initialMessage }: ChatPageProps) => {
   const [activeChatId, setActiveChatId] = useState<string | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
   const [showModelSelector, setShowModelSelector] = useState(false);
-  const [currentModel, setCurrentModel] = useState('gemini-pro');
+  const [currentModel, setCurrentModel] = useState(defaultModels[0].id);
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
   const [editingMessageId, setEditingMessageId] = useState<string | null>(null);
@@ -72,11 +69,17 @@ const ChatPage = ({ initialMessage }: ChatPageProps) => {
   
   // Initialize models if they don't exist
   useEffect(() => {
-    // Use storage utility to check and initialize models
-    const savedModels = getFromStorage<Model[]>(MODELS_STORAGE_KEY, []);
-    if (savedModels.length === 0) {
-      setToStorage(MODELS_STORAGE_KEY, defaultModels);
-    }
+    // Clear existing models to force reset
+    clearStorage(MODELS_STORAGE_KEY);
+    
+    // Set new models configuration
+    setToStorage(MODELS_STORAGE_KEY, defaultModels.map(model => ({
+      id: model.id,
+      name: model.name,
+      provider: model.provider,
+      isEnabled: true,
+      isDefault: model.id === 'gpt-4o'
+    })));
   }, []);
   
   // Load chats from localStorage on component mount
@@ -105,7 +108,13 @@ const ChatPage = ({ initialMessage }: ChatPageProps) => {
     }
     
     // Load default model from settings
-    const savedModels = getFromStorage<Model[]>(MODELS_STORAGE_KEY, defaultModels);
+    const savedModels = getFromStorage<Model[]>(MODELS_STORAGE_KEY, defaultModels.map(model => ({
+      id: model.id,
+      name: model.name,
+      provider: model.provider,
+      isEnabled: true,
+      isDefault: model.id === 'gpt-4o'
+    })));
     const defaultModel = savedModels.find((model: Model) => model.isDefault && model.isEnabled);
     if (defaultModel) {
       setCurrentModel(defaultModel.id);
@@ -263,7 +272,13 @@ const ChatPage = ({ initialMessage }: ChatPageProps) => {
     let modelName = currentModel;
     let modelProvider = '';
     
-    const savedModels = getFromStorage<Model[]>(MODELS_STORAGE_KEY, defaultModels);
+    const savedModels = getFromStorage<Model[]>(MODELS_STORAGE_KEY, defaultModels.map(model => ({
+      id: model.id,
+      name: model.name,
+      provider: model.provider,
+      isEnabled: true,
+      isDefault: model.id === 'gpt-4o'
+    })));
     const selectedModel = savedModels.find((model: Model) => model.id === currentModel);
     if (selectedModel) {
       modelName = selectedModel.name;
@@ -773,6 +788,23 @@ const ChatPage = ({ initialMessage }: ChatPageProps) => {
       
       console.log('All chats deleted successfully');
     }
+  };
+
+  // Save models to storage
+  const saveModels = (models: Model[]) => {
+    setToStorage(MODELS_STORAGE_KEY, models);
+  };
+
+  // Get available models
+  const getAvailableModels = () => {
+    const savedModels = getFromStorage<Model[]>(MODELS_STORAGE_KEY, defaultModels.map(model => ({
+      id: model.id,
+      name: model.name,
+      provider: model.provider,
+      isEnabled: true,
+      isDefault: model.id === 'gpt-4o'
+    })));
+    return savedModels.filter(model => model.isEnabled);
   };
 
   // Don't render until initialization is complete (to avoid flicker)

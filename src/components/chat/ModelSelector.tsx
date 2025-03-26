@@ -22,21 +22,9 @@ interface ModelSelectorProps {
 const STORAGE_KEY = 'ai-chat-app-models';
 
 const defaultModels: Model[] = [
-  { id: 'gpt-4o', name: 'GPT-4o', provider: 'OpenAI', isEnabled: true, isDefault: true },
-  { id: 'gpt-4o-latest', name: 'GPT-4o Latest', provider: 'OpenAI', isEnabled: true, isDefault: false },
-  { id: 'gpt-4-turbo', name: 'GPT-4 Turbo', provider: 'OpenAI', isEnabled: true, isDefault: false },
-  { id: 'gpt-3.5-turbo', name: 'GPT-3.5 Turbo', provider: 'OpenAI', isEnabled: true, isDefault: false },
-  { id: 'claude-3.5-sonnet', name: 'Claude 3.5 Sonnet', provider: 'Anthropic', isEnabled: true, isDefault: false },
-  { id: 'claude-3-opus', name: 'Claude 3 Opus', provider: 'Anthropic', isEnabled: true, isDefault: false },
-  { id: 'claude-3-haiku', name: 'Claude 3 Haiku', provider: 'Anthropic', isEnabled: true, isDefault: false },
-  { id: 'gemini-1.5-flash', name: 'Gemini 1.5 Flash', provider: 'Google', isEnabled: true, isDefault: false },
-  { id: 'gemini-1.5-pro', name: 'Gemini 1.5 Pro', provider: 'Google', isEnabled: true, isDefault: false },
-  { id: 'llama-3.1-70b', name: 'Llama 3.1 70B', provider: 'Meta', isEnabled: true, isDefault: false },
-  { id: 'llama-3.1-405b', name: 'Llama 3.1 405B', provider: 'Meta', isEnabled: true, isDefault: false },
-  { id: 'command-r-plus', name: 'Command R+', provider: 'Cohere', isEnabled: true, isDefault: false },
-  { id: 'command-r', name: 'Command R', provider: 'Cohere', isEnabled: true, isDefault: false },
-  { id: 'qwen-2.5-72b', name: 'Qwen 2.5 72B', provider: 'Other', isEnabled: true, isDefault: false },
-  { id: 'grok-2', name: 'Grok-2', provider: 'Other', isEnabled: true, isDefault: false },
+  { id: 'gpt-4o', name: 'Azure OpenAI GPT-4o', provider: 'OpenAI', isEnabled: true, isDefault: true },
+  { id: 'deepseek-r1', name: 'DeepSeek-R1', provider: 'DeepSeek', isEnabled: true, isDefault: false },
+  { id: 'llama-3.3-70b-instruct', name: 'Llama-3.3-70B-Instruct', provider: 'Meta', isEnabled: true, isDefault: false }
 ];
 
 const ModelSelector = ({ currentModel, onSelectModel, onClose }: ModelSelectorProps) => {
@@ -106,14 +94,10 @@ const ModelSelector = ({ currentModel, onSelectModel, onClose }: ModelSelectorPr
     switch (provider.toLowerCase()) {
       case 'openai':
         return 'fa-bolt';
-      case 'anthropic':
-        return 'fa-robot';
-      case 'google':
-        return 'fa-google';
+      case 'deepseek':
+        return 'fa-brain';
       case 'meta':
         return 'fa-facebook';
-      case 'cohere':
-        return 'fa-brain';
       default:
         return 'fa-microchip';
     }
