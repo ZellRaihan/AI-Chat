@@ -47,14 +47,11 @@ const STORAGE_KEY = 'ai-chat-app-data';
 const MODELS_STORAGE_KEY = 'ai-chat-app-models';
 
 const defaultModels: Model[] = [
-  { id: 'gpt-4o', name: 'GPT-4o', provider: 'OpenAI', isEnabled: true, isDefault: true },
-  { id: 'gpt-4', name: 'GPT-4', provider: 'OpenAI', isEnabled: true, isDefault: false },
+  { id: 'gemini-pro', name: 'Gemini Pro', provider: 'Google', isEnabled: true, isDefault: true },
   { id: 'gpt-3.5-turbo', name: 'GPT-3.5 Turbo', provider: 'OpenAI', isEnabled: true, isDefault: false },
   { id: 'claude-3-opus', name: 'Claude 3 Opus', provider: 'Anthropic', isEnabled: true, isDefault: false },
   { id: 'claude-3-sonnet', name: 'Claude 3 Sonnet', provider: 'Anthropic', isEnabled: true, isDefault: false },
   { id: 'claude-3-haiku', name: 'Claude 3 Haiku', provider: 'Anthropic', isEnabled: true, isDefault: false },
-  { id: 'gemini-pro', name: 'Gemini Pro', provider: 'Google', isEnabled: true, isDefault: false },
-  { id: 'gemini-1.5-flash', name: 'Gemini 1.5 Flash', provider: 'Google', isEnabled: true, isDefault: false },
   { id: 'llama-3-70b', name: 'Llama 3 70B', provider: 'Meta', isEnabled: true, isDefault: false },
   { id: 'command-r', name: 'Command R', provider: 'Cohere', isEnabled: true, isDefault: false },
 ];
@@ -64,7 +61,7 @@ const ChatPage = ({ initialMessage }: ChatPageProps) => {
   const [activeChatId, setActiveChatId] = useState<string | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
   const [showModelSelector, setShowModelSelector] = useState(false);
-  const [currentModel, setCurrentModel] = useState('gpt-4o');
+  const [currentModel, setCurrentModel] = useState('gemini-pro');
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
   const [editingMessageId, setEditingMessageId] = useState<string | null>(null);

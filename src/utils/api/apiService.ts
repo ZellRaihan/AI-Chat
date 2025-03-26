@@ -146,7 +146,13 @@ export async function getAIResponse(options: AIRequestOptions): Promise<AIRespon
     if (!apiKey || apiKey.trim() === '') {
       console.warn(`No API key available for ${modelConfig.provider}. Trying to find an alternative model.`);
       
-      // Try to find a model with an available API key
+      // Try Gemini as first fallback
+      if (modelId !== 'gemini-pro' && API_KEYS.GEMINI) {
+        console.log('Falling back to Gemini Pro');
+        return getAIResponse({...options, modelId: 'gemini-pro'});
+      }
+      
+      // Try to find any other model with an available API key
       const availableModel = findAvailableModel();
       if (availableModel) {
         console.log(`Switching to available model: ${availableModel}`);
@@ -159,43 +165,64 @@ export async function getAIResponse(options: AIRequestOptions): Promise<AIRespon
     // Route to the appropriate provider's API and ensure minimum delay
     let responsePromise: Promise<AIResponse>;
     
-    switch (modelConfig.provider) {
-      case 'Google':
-        console.log('Calling Gemini API with config:', {
-          modelId,
-          messageCount: messages.length,
-          apiKeyLength: apiKey.length
-        });
-        responsePromise = callGeminiAPI(modelId, messages, apiKey);
-        break;
-      case 'OpenAI':
-        responsePromise = callOpenAIAPI(modelId, messages, apiKey);
-        break;
-      case 'Anthropic':
-        responsePromise = callAnthropicAPI(modelId, messages, apiKey);
-        break;
-      case 'Meta':
-        responsePromise = callMetaAPI(modelId, messages, apiKey);
-        break;
-      case 'Cohere':
-        responsePromise = callCohereAPI(modelId, messages, apiKey);
-        break;
-      default:
-        console.warn(`Provider not implemented: ${modelConfig.provider}`);
-        
-        // Try to find a model with an available API key
-        const availableModel = findAvailableModel();
-        if (availableModel) {
-          console.log(`Switching to available model: ${availableModel}`);
-          return getAIResponse({...options, modelId: availableModel});
-        }
-        
-        return generateSimulatedResponse(messages, modelId);
+    try {
+      switch (modelConfig.provider) {
+        case 'Google':
+          console.log('Calling Gemini API with config:', {
+            modelId,
+            messageCount: messages.length,
+            apiKeyLength: apiKey.length
+          });
+          responsePromise = callGeminiAPI(modelId, messages, apiKey);
+          break;
+        case 'OpenAI':
+          console.log('Calling OpenAI API with config:', {
+            modelId,
+            messageCount: messages.length,
+            apiKeyLength: apiKey.length
+          });
+          responsePromise = callOpenAIAPI(modelId, messages, apiKey);
+          break;
+        case 'Anthropic':
+          responsePromise = callAnthropicAPI(modelId, messages, apiKey);
+          break;
+        case 'Meta':
+          responsePromise = callMetaAPI(modelId, messages, apiKey);
+          break;
+        case 'Cohere':
+          responsePromise = callCohereAPI(modelId, messages, apiKey);
+          break;
+        default:
+          console.warn(`Provider not implemented: ${modelConfig.provider}`);
+          
+          // Try Gemini as fallback
+          if (API_KEYS.GEMINI) {
+            console.log('Falling back to Gemini Pro');
+            return getAIResponse({...options, modelId: 'gemini-pro'});
+          }
+          
+          return generateSimulatedResponse(messages, modelId);
+      }
+      
+      // Ensure a minimum delay to show the thinking indicator
+      return await ensureMinimumDelay(responsePromise, 1500);
+    } catch (error) {
+      console.error(`Error calling ${modelConfig.provider} API:`, error);
+      
+      // If OpenAI fails, try Gemini
+      if (modelConfig.provider === 'OpenAI' && API_KEYS.GEMINI) {
+        console.log('OpenAI API failed, falling back to Gemini Pro');
+        return getAIResponse({...options, modelId: 'gemini-pro'});
+      }
+      
+      // If Gemini fails, try OpenAI GPT-3.5
+      if (modelConfig.provider === 'Google' && API_KEYS.OPENAI) {
+        console.log('Gemini API failed, falling back to GPT-3.5 Turbo');
+        return getAIResponse({...options, modelId: 'gpt-3.5-turbo'});
+      }
+      
+      throw error;
     }
-    
-    // Ensure a minimum delay to show the thinking indicator
-    return await ensureMinimumDelay(responsePromise, 1500);
-    
   } catch (error) {
     console.error(`Error in AI response:`, {
       error,
@@ -204,22 +231,6 @@ export async function getAIResponse(options: AIRequestOptions): Promise<AIRespon
       provider: MODEL_CONFIGS[modelId]?.provider
     });
     
-    // Try to find a different model with an available API key
-    const availableModels = Object.entries(MODEL_CONFIGS)
-      .filter(([id, config]) => {
-        // Filter out current model and ensure API key exists
-        return id !== modelId && API_KEYS[config.apiConfigKey] && API_KEYS[config.apiConfigKey].trim() !== '';
-      })
-      .map(([id, _]) => id);
-    
-    if (availableModels.length > 0) {
-      // Try another model
-      const nextModel = availableModels[0];
-      console.log(`Attempting to use alternative model: ${nextModel}`);
-      return getAIResponse({...options, modelId: nextModel});
-    }
-    
-    console.log("Falling back to simulated response due to error");
     return generateSimulatedResponse(messages, modelId);
   }
 }
