@@ -28,11 +28,11 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL('https://ai-chats.net'),
   title: {
-    default: 'AI Chat - Intelligent Conversations with Advanced AI',
+    default: 'AI Chat: Your Intelligent Conversation Partner - Free (No Signup)',
     template: '%s | AI Chat'
   },
-  description: 'Experience intelligent conversations with our advanced AI chat platform. Get instant, accurate responses powered by cutting-edge language models.',
-  keywords: ['AI chat', 'artificial intelligence', 'chatbot', 'GPT', 'Claude', 'AI assistant', 'intelligent conversations'],
+  description: 'Looking for a free AI chat that actually understands you? Our online AI chat assistant delivers helpful, human-like conversations without signups, subscriptions, or complications.',
+  keywords: ['AI chat', 'free AI chat', 'no signup chatbot', 'AI assistant', 'human-like AI', 'intelligent conversations', 'chatbot', 'AI tools', 'AI writing assistant', 'GPT', 'Claude', 'language model', 'virtual assistant', 'AI helper'],
   authors: [{ name: 'AI Chat Team' }],
   creator: 'AI Chat Team',
   publisher: 'AI Chat',
@@ -58,8 +58,8 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: 'https://ai-chats.net',
     siteName: 'AI Chat',
-    title: 'AI Chat - Intelligent Conversations with Advanced AI',
-    description: 'Experience intelligent conversations with our advanced AI chat platform. Get instant, accurate responses powered by cutting-edge language models.',
+    title: 'AI Chat: Your Intelligent Conversation Partner - Free (No Signup)',
+    description: 'Looking for a free AI chat that actually understands you? Our online AI chat assistant delivers helpful, human-like conversations without signups, subscriptions, or complications.',
     images: [
       {
         url: '/android-chrome-512x512.png',
@@ -71,8 +71,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AI Chat - Intelligent Conversations with Advanced AI',
-    description: 'Experience intelligent conversations with our advanced AI chat platform. Get instant, accurate responses powered by cutting-edge language models.',
+    title: 'AI Chat: Your Intelligent Conversation Partner - Free (No Signup)',
+    description: 'Looking for a free AI chat that actually understands you? Our online AI chat assistant delivers helpful, human-like conversations without signups, subscriptions, or complications.',
     images: ['/android-chrome-512x512.png'],
     creator: '@aichat',
   },
@@ -89,7 +89,7 @@ export const metadata: Metadata = {
   },
   manifest: '/manifest.json',
   verification: {
-    google: 'your-verification-code',
+    google: 'Add your Google Search Console verification code here',
   },
   appleWebApp: {
     capable: true,

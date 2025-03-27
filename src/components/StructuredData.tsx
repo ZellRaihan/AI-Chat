@@ -29,11 +29,20 @@ export default function StructuredData() {
     "url": "https://ai-chats.net/chat",
     "applicationCategory": "UtilityApplication",
     "operatingSystem": "Web Browser",
+    "description": "Looking for a free AI chat that actually understands you? Our online AI chat assistant delivers helpful, human-like conversations without signups, subscriptions, or complications.",
     "offers": {
       "@type": "Offer",
       "price": "0",
       "priceCurrency": "USD"
-    }
+    },
+    "featureList": [
+      "No signup required",
+      "Completely free to use",
+      "Human-like conversations",
+      "Available 24/7",
+      "Privacy-focused with no data storage",
+      "Helpful for students, writers, professionals, and language learners"
+    ]
   };
 
   // Add context to the JSON-LD output
