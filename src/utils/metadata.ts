@@ -11,7 +11,7 @@ export function generateMetadata({
   title,
   description,
   path,
-  image = '/android-chrome-512x512.png'
+  image = '/web-app-manifest-512x512.png'
 }: GenerateMetadataProps): Metadata {
   const url = `https://ai-chats.net${path}`;
   
