@@ -6,6 +6,7 @@ import Link from 'next/link';
 import styles from '@/styles/Settings.module.css';
 import { useTheme } from '@/components/ThemeProvider';
 import { getFromStorage, setToStorage, clearStorage } from '../../utils/storageUtils';
+import MainLayout from '@/components/MainLayout';
 
 interface Model {
   id: string;
@@ -79,82 +80,67 @@ export default function SettingsPage() {
   }
 
   return (
-    <div className={styles.settingsPage}>
-      <header className={styles.header}>
-        <div className={styles.headerContent}>
-          <Link href="/" className={styles.backButton}>
-            <i className="fa fa-arrow-left"></i>
-            <span>Back to Chat</span>
-          </Link>
-          <h1>Settings</h1>
-          <button onClick={toggleTheme} className={styles.themeToggle}>
-            {theme === 'dark' ? (
-              <i className="fa fa-sun-o"></i>
-            ) : (
-              <i className="fa fa-moon-o"></i>
-            )}
-          </button>
-        </div>
-      </header>
+    <MainLayout>
+      <div className={styles.settingsPage}>
+        <main className={styles.content}>
+          <section className={styles.section}>
+            <h2>AI Models</h2>
+            <p className={styles.sectionDescription}>
+              Configure which AI models are available in the chat interface and set your default model.
+            </p>
 
-      <main className={styles.content}>
-        <section className={styles.section}>
-          <h2>AI Models</h2>
-          <p className={styles.sectionDescription}>
-            Configure which AI models are available in the chat interface and set your default model.
-          </p>
+            <div className={styles.modelsList}>
+              <div className={styles.modelHeader}>
+                <div className={styles.modelName}>Model</div>
+                <div className={styles.modelProvider}>Provider</div>
+                <div className={styles.modelControls}>Enabled</div>
+                <div className={styles.modelControls}>Default</div>
+              </div>
 
-          <div className={styles.modelsList}>
-            <div className={styles.modelHeader}>
-              <div className={styles.modelName}>Model</div>
-              <div className={styles.modelProvider}>Provider</div>
-              <div className={styles.modelControls}>Enabled</div>
-              <div className={styles.modelControls}>Default</div>
+              {models.map(model => (
+                <div key={model.id} className={styles.modelItem}>
+                  <div className={styles.modelName}>{model.name}</div>
+                  <div className={styles.modelProvider}>{model.provider}</div>
+                  <div className={styles.modelControls}>
+                    <input
+                      type="checkbox"
+                      checked={model.isEnabled}
+                      onChange={() => handleToggleEnabled(model.id)}
+                      id={`toggle-${model.id}`}
+                      className={styles.toggleInput}
+                    />
+                    <label
+                      htmlFor={`toggle-${model.id}`}
+                      className={styles.toggleLabel}
+                    ></label>
+                  </div>
+                  <div className={styles.modelControls}>
+                    <input
+                      type="radio"
+                      name="defaultModel"
+                      checked={model.isDefault}
+                      onChange={() => handleSetDefault(model.id)}
+                      id={`default-${model.id}`}
+                      className={styles.radioInput}
+                      disabled={!model.isEnabled}
+                    />
+                    <label
+                      htmlFor={`default-${model.id}`}
+                      className={styles.radioLabel}
+                    ></label>
+                  </div>
+                </div>
+              ))}
             </div>
 
-            {models.map(model => (
-              <div key={model.id} className={styles.modelItem}>
-                <div className={styles.modelName}>{model.name}</div>
-                <div className={styles.modelProvider}>{model.provider}</div>
-                <div className={styles.modelControls}>
-                  <input
-                    type="checkbox"
-                    checked={model.isEnabled}
-                    onChange={() => handleToggleEnabled(model.id)}
-                    id={`toggle-${model.id}`}
-                    className={styles.toggleInput}
-                  />
-                  <label
-                    htmlFor={`toggle-${model.id}`}
-                    className={styles.toggleLabel}
-                  ></label>
-                </div>
-                <div className={styles.modelControls}>
-                  <input
-                    type="radio"
-                    name="defaultModel"
-                    checked={model.isDefault}
-                    onChange={() => handleSetDefault(model.id)}
-                    id={`default-${model.id}`}
-                    className={styles.radioInput}
-                    disabled={!model.isEnabled}
-                  />
-                  <label
-                    htmlFor={`default-${model.id}`}
-                    className={styles.radioLabel}
-                  ></label>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className={styles.actions}>
-            <button onClick={handleReset} className={styles.resetButton}>
-              Reset to Defaults
-            </button>
-          </div>
-        </section>
-      </main>
-    </div>
+            <div className={styles.actions}>
+              <button onClick={handleReset} className={styles.resetButton}>
+                Reset to Defaults
+              </button>
+            </div>
+          </section>
+        </main>
+      </div>
+    </MainLayout>
   );
 } 

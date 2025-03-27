@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import styles from '@/styles/MainHeader.module.css';
 import { useTheme } from './ThemeProvider';
 
@@ -19,6 +20,13 @@ const MainHeader = () => {
         <nav className={styles.navbar}>
           <div className={styles.logoContainer}>
             <Link href="/" className={styles.logoLink} aria-label="AI Chat Home">
+              <Image 
+                src="/logo.png" 
+                alt="AI Chat Logo" 
+                width={32} 
+                height={32} 
+                className={styles.logoImage}
+              />
               <span className={styles.logo}>AI Chat</span>
             </Link>
           </div>

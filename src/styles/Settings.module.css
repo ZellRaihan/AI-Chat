@@ -4,71 +4,7 @@
   min-height: 100vh;
   background-color: var(--bg-color);
   color: var(--text-color);
-}
-
-.header {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  width: 100%;
-  height: 60px;
-  background-color: var(--bg-color-secondary);
-  border-bottom: 1px solid var(--border-color);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 20px;
-}
-
-.headerContent {
-  width: 100%;
-  max-width: 960px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.backButton {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--text-color-secondary);
-  text-decoration: none;
-  padding: 8px 12px;
-  border-radius: 6px;
-  transition: background-color 0.2s ease;
-}
-
-.backButton:hover {
-  background-color: var(--bg-color-tertiary);
-  color: var(--text-color);
-}
-
-.backButton i {
-  font-size: 14px;
-}
-
-.themeToggle {
-  background: none;
-  border: none;
-  color: var(--text-color-secondary);
-  cursor: pointer;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-color 0.2s ease;
-}
-
-.themeToggle:hover {
-  background-color: var(--bg-color-tertiary);
-  color: var(--text-color);
-}
-
-.themeToggle i {
-  font-size: 18px;
+  padding-top: var(--header-height, 64px);
 }
 
 .content {
@@ -273,10 +209,6 @@
   .section h2 {
     font-size: 18px;
   }
-  
-  .backButton span {
-    display: none;
-  }
 }
 
 .settingsPanel {
@@ -433,4 +365,11 @@
   .settingsPanel {
     max-width: 100%;
   }
+}
+
+.settingsTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-color);
+  margin: 0;
 } 

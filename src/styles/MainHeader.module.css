@@ -35,6 +35,13 @@
   gap: 0.5rem;
 }
 
+.logoImage {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  border-radius: 6px;
+}
+
 .logo {
   font-size: 1.5rem;
   font-weight: 700;

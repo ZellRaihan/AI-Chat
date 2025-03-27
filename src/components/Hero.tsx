@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import styles from '../styles/Hero.module.css';
 import { useTheme } from './ThemeProvider';
 
@@ -22,7 +23,16 @@ const Hero = () => {
     <section className={styles.hero}>
       <div className={styles.container}>
         <div className={styles.content}>
-          <h1 className={styles.title}>AI Chat: Your Intelligent Conversation Partner</h1>
+          <div className={styles.logoContainer}>
+            <Image 
+              src="/logo.png" 
+              alt="AI Chat Logo" 
+              width={120} 
+              height={120} 
+              className={styles.logo}
+            />
+          </div>
+          <h1 className={styles.title}>AI Chat</h1>
           <p className={styles.subtitle}>
             Looking for a free AI chat that actually understands you? You've found it at AI-Chats.net. Our online AI chat assistant delivers helpful, human-like conversations without signups, subscriptions, or complications.
           </p>

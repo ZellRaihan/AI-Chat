@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import styles from '@/styles/Header.module.css';
 
 interface HeaderProps {
@@ -77,7 +78,13 @@ const Header = ({
           <i className="fas fa-bars"></i>
         </button>
         <h1 className={styles.title}>
-          <i className="fas fa-robot"></i>
+          <Image 
+            src="/logo.png" 
+            alt="AI Chat Logo" 
+            width={24} 
+            height={24} 
+            className={styles.logoImage}
+          />
           <span className={styles.titleText}>AI Chat</span>
         </h1>
       </div>
