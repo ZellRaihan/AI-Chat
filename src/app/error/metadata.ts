@@ -2,7 +2,8 @@ import type { Metadata } from 'next';
 import { generateMetadata } from '@/utils/metadata';
 
 export const metadata: Metadata = generateMetadata({
-  title: 'Oops! Something Went Wrong - Free AI Chat',
-  description: 'We encountered an error, but our free AI chat is still ready to help! Return to continue your conversation without signup, or contact our support team.',
+  title: 'AI Chat Error - Something Went Wrong',
+  description: 'We encountered an error. Please try again or contact us for support. Our free AI chat service is here to help.',
   path: '/error',
+  image: '/AI-Chat-Banner.webp'
 }); 
