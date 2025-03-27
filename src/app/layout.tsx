@@ -21,7 +21,8 @@ export const viewport: Viewport = {
   themeColor: [
     { media: '(prefers-color-scheme: light)', color: '#ffffff' },
     { media: '(prefers-color-scheme: dark)', color: '#121220' }
-  ]
+  ],
+  colorScheme: 'dark light'
 };
 
 // Base metadata configuration
@@ -103,7 +104,6 @@ export const metadata: Metadata = {
   category: 'technology',
   classification: 'business',
   referrer: 'origin-when-cross-origin',
-  colorScheme: 'dark light',
 };
 
 export default function RootLayout({
