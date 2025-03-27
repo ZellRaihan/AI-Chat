@@ -169,6 +169,48 @@
   margin-top: 24px;
   display: flex;
   justify-content: flex-end;
+  gap: 12px;
+}
+
+.saveButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.saveButton:hover:not(:disabled) {
+  background-color: var(--primary-color-hover);
+  transform: translateY(-1px);
+}
+
+.saveButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.saveButton.saving {
+  background-color: var(--text-color-secondary);
+}
+
+.saveButton.success {
+  background-color: #10b981;
+}
+
+.saveButton.error {
+  background-color: var(--danger-color);
+}
+
+.saveButton i {
+  font-size: 14px;
 }
 
 .resetButton {

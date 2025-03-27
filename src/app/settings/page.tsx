@@ -27,26 +27,25 @@ const defaultModels: Model[] = [
 export default function SettingsPage() {
   const [models, setModels] = useState<Model[]>([]);
   const [initialized, setInitialized] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
+  const [saveStatus, setSaveStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [hasChanges, setHasChanges] = useState(false);
   const router = useRouter();
   const { theme, toggleTheme } = useTheme();
   
   // Load models from localStorage on component mount
   useEffect(() => {
-    // Clear existing models to force reset
-    clearStorage(STORAGE_KEY);
-    
-    // Set new models configuration
-    const savedModels = defaultModels;
+    const savedModels = getFromStorage<Model[]>(STORAGE_KEY, defaultModels);
     setModels(savedModels);
-    setToStorage(STORAGE_KEY, savedModels);
     setInitialized(true);
   }, []);
   
-  // Save models to localStorage when they change
+  // Track changes
   useEffect(() => {
     if (initialized) {
-      // Use storage utility to safely save models
-      setToStorage(STORAGE_KEY, models);
+      const savedModels = getFromStorage<Model[]>(STORAGE_KEY, defaultModels);
+      const hasModelChanges = JSON.stringify(models) !== JSON.stringify(savedModels);
+      setHasChanges(hasModelChanges);
     }
   }, [models, initialized]);
 
@@ -72,6 +71,40 @@ export default function SettingsPage() {
   const handleReset = () => {
     if (confirm('Are you sure you want to reset all model settings to default?')) {
       setModels(defaultModels);
+    }
+  };
+
+  const handleSave = async () => {
+    try {
+      setIsSaving(true);
+      setSaveStatus('idle');
+      
+      // Validate that at least one model is enabled
+      const enabledModels = models.filter(model => model.isEnabled);
+      if (enabledModels.length === 0) {
+        throw new Error('At least one model must be enabled');
+      }
+
+      // Validate that exactly one model is set as default
+      const defaultModels = models.filter(model => model.isDefault);
+      if (defaultModels.length !== 1) {
+        throw new Error('Exactly one model must be set as default');
+      }
+
+      // Save to storage
+      const success = setToStorage<Model[]>(STORAGE_KEY, models);
+      if (!success) {
+        throw new Error('Failed to save settings');
+      }
+      
+      setSaveStatus('success');
+      setTimeout(() => setSaveStatus('idle'), 2000);
+    } catch (error) {
+      console.error('Error saving settings:', error);
+      setSaveStatus('error');
+      setTimeout(() => setSaveStatus('idle'), 2000);
+    } finally {
+      setIsSaving(false);
     }
   };
 
@@ -134,6 +167,33 @@ export default function SettingsPage() {
             </div>
 
             <div className={styles.actions}>
+              <button 
+                onClick={handleSave} 
+                className={`${styles.saveButton} ${isSaving ? styles.saving : ''} ${saveStatus === 'success' ? styles.success : ''} ${saveStatus === 'error' ? styles.error : ''}`}
+                disabled={!hasChanges || isSaving}
+              >
+                {isSaving ? (
+                  <>
+                    <i className="fas fa-spinner fa-spin"></i>
+                    <span>Saving...</span>
+                  </>
+                ) : saveStatus === 'success' ? (
+                  <>
+                    <i className="fas fa-check"></i>
+                    <span>Saved!</span>
+                  </>
+                ) : saveStatus === 'error' ? (
+                  <>
+                    <i className="fas fa-exclamation-circle"></i>
+                    <span>Error</span>
+                  </>
+                ) : (
+                  <>
+                    <i className="fas fa-save"></i>
+                    <span>Save Changes</span>
+                  </>
+                )}
+              </button>
               <button onClick={handleReset} className={styles.resetButton}>
                 Reset to Defaults
               </button>
