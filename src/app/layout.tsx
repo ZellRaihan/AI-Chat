@@ -28,11 +28,11 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL('https://ai-chats.net'),
   title: {
-    default: 'AI Chat: Your Intelligent Conversation Partner - Free (No Signup)',
+    default: 'AI Chat - Intelligent Conversations with Advanced AI',
     template: '%s | AI Chat'
   },
-  description: 'Looking for a free AI chat that actually understands you? Our online AI chat assistant delivers helpful, human-like conversations without signups, subscriptions, or complications.',
-  keywords: ['AI chat', 'free AI chat', 'no signup chatbot', 'AI assistant', 'human-like AI', 'intelligent conversations', 'chatbot', 'AI tools', 'AI writing assistant', 'GPT', 'Claude', 'language model', 'virtual assistant', 'AI helper'],
+  description: 'Experience intelligent conversations with our advanced AI chat platform. Get instant, accurate responses powered by cutting-edge language models.',
+  keywords: ['AI chat', 'artificial intelligence', 'chatbot', 'GPT', 'Claude', 'AI assistant', 'intelligent conversations'],
   authors: [{ name: 'AI Chat Team' }],
   creator: 'AI Chat Team',
   publisher: 'AI Chat',
@@ -62,10 +62,10 @@ export const metadata: Metadata = {
     description: 'Looking for a free AI chat that actually understands you? Our online AI chat assistant delivers helpful, human-like conversations without signups, subscriptions, or complications.',
     images: [
       {
-        url: '/android-chrome-512x512.png',
-        width: 512,
-        height: 512,
-        alt: 'AI Chat Logo',
+        url: '/AI-Chat-Banner.webp',
+        width: 1100,
+        height: 400,
+        alt: 'AI Chat',
       },
     ],
   },
@@ -73,7 +73,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'AI Chat: Your Intelligent Conversation Partner - Free (No Signup)',
     description: 'Looking for a free AI chat that actually understands you? Our online AI chat assistant delivers helpful, human-like conversations without signups, subscriptions, or complications.',
-    images: ['/android-chrome-512x512.png'],
+    images: ['/AI-Chat-Banner.webp'],
     creator: '@aichat',
   },
   icons: {
@@ -89,7 +89,7 @@ export const metadata: Metadata = {
   },
   manifest: '/manifest.json',
   verification: {
-    google: 'Add your Google Search Console verification code here',
+    google: 'your-verification-code',
   },
   appleWebApp: {
     capable: true,

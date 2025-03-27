@@ -15,6 +15,11 @@ export function generateMetadata({
 }: GenerateMetadataProps): Metadata {
   const url = `https://ai-chats.net${path}`;
   
+  // Determine image dimensions based on filename
+  const isWebpBanner = image.includes('Banner');
+  const width = isWebpBanner ? 1100 : 512;
+  const height = isWebpBanner ? 400 : 512;
+  
   return {
     title,
     description,
@@ -25,9 +30,9 @@ export function generateMetadata({
       images: [
         {
           url: image,
-          width: 512,
-          height: 512,
-          alt: title,
+          width: width,
+          height: height,
+          alt: 'AI Chat',
         },
       ],
     },

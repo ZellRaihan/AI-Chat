@@ -66,11 +66,10 @@ const Features = () => {
         <div className={styles.bannerContainer}>
           <Image 
             src="/AI-Chat-Banner.webp" 
-            alt="AI Chat Experience - Intelligent conversations that understand you" 
+            alt="AI Chat" 
             className={styles.bannerImage}
             width={1100}
             height={400}
-            priority
           />
         </div>
         
