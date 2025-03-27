@@ -11,9 +11,9 @@ const CTA = () => {
   return (
     <section className={styles.cta}>
       <div className={styles.container}>
-        <h2 className={styles.title}>Ready to Make Your Life Easier?</h2>
+        <h2 className={styles.title}>Start Your First Chat Now</h2>
         <p className={styles.subtitle}>
-          Start getting help right now. No signup, no waiting - just type your question and get started With AI Chat.
+          Experience what thousands of users already know: AI chat can be natural, helpful, and surprisingly human. Whether you need practical assistance or just want to explore what's possible with AI, your next great conversation is just a click away.
         </p>
         
         <div className={styles.highlightBox}>
@@ -21,28 +21,29 @@ const CTA = () => {
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className={styles.icon}>
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
-            <span>Always Free</span>
+            <span>No Signups</span>
           </div>
           <div className={styles.highlightItem}>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className={styles.icon}>
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
-            <span>No Signup Required</span>
+            <span>No Downloads</span>
           </div>
           <div className={styles.highlightItem}>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className={styles.icon}>
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
-            <span>Instant Help</span>
+            <span>No Complications</span>
           </div>
         </div>
         
+        <p className={styles.subtitle} style={{ fontSize: '1rem', marginTop: '1rem' }}>
+          Just helpful AI conversation, instantly.
+        </p>
+        
         <div className={styles.buttonGroup}>
           <Link href="/chat" className={styles.primaryButton}>
-            Start Free Chat
-          </Link>
-          <Link href="/#features" className={styles.secondaryButton}>
-            See How It Works
+            START CHATTING NOW - FREE
           </Link>
         </div>
       </div>

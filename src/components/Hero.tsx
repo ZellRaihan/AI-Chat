@@ -22,10 +22,9 @@ const Hero = () => {
     <section className={styles.hero}>
       <div className={styles.container}>
         <div className={styles.content}>
-          <h1 className={styles.title}>Your AI Chat Partner for Everyday Help</h1>
+          <h1 className={styles.title}>AI Chat: Your Intelligent Conversation Partner</h1>
           <p className={styles.subtitle}>
-            Hey there! 👋 Need a helping hand with writing, learning, or problem-solving? Our AI chat is here to make your life easier. 
-            Start chatting instantly - no signup needed, no credit card required.
+            Looking for a free AI chat that actually understands you? You've found it at AI-Chats.net. Our online AI chat assistant delivers helpful, human-like conversations without signups, subscriptions, or complications.
           </p>
 
           <form onSubmit={handleSubmit} className={styles.chatPromptBox}>
@@ -35,7 +34,7 @@ const Hero = () => {
                 className={styles.promptInput}
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
-                placeholder="What can I help you with today?"
+                placeholder="Ask anything... we actually understand you"
                 aria-label="Chat message"
               />
             </div>
@@ -47,7 +46,7 @@ const Hero = () => {
           <div className={styles.benefits}>
             <div className={styles.benefitItem}>
               <span className={styles.icon}>⚡</span>
-              <span>Instant help, any task</span>
+              <span>Instant responses</span>
             </div>
             <div className={styles.benefitItem}>
               <span className={styles.icon}>🔓</span>
@@ -55,21 +54,21 @@ const Hero = () => {
             </div>
             <div className={styles.benefitItem}>
               <span className={styles.icon}>💎</span>
-              <span>Always free</span>
+              <span>Truly free</span>
             </div>
             <div className={styles.benefitItem}>
               <span className={styles.icon}>💬</span>
-              <span>Natural chat</span>
+              <span>Human-like chat</span>
             </div>
             <div className={styles.benefitItem}>
               <span className={styles.icon}>🛡️</span>
-              <span>Privacy protected</span>
+              <span>Private & secure</span>
             </div>
           </div>
           
           <div className={styles.buttons}>
             <Link href="#features" className={styles.primaryButton}>
-              Learn More
+              Why Choose Us
             </Link>
             <Link href="/chat" className={styles.secondaryButton}>
               Start Chatting Now
