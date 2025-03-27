@@ -5,15 +5,15 @@ import MainLayout from '@/components/MainLayout';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: '404: Page Not Found | AI-Chats.net',
-  description: 'The page you are looking for could not be found. Please check the URL or return to the homepage.',
+  title: 'Page Not Found - Free AI Chat | AI-Chats.net',
+  description: 'Sorry, this page doesn\'t exist. Return to our free AI chat to start a conversation without signup, or check out our other helpful resources.',
   openGraph: {
-    title: '404: Page Not Found | AI-Chats.net',
-    description: 'The page you are looking for could not be found. Please check the URL or return to the homepage.',
+    title: 'Page Not Found - Free AI Chat | AI-Chats.net',
+    description: 'Sorry, this page doesn\'t exist. Return to our free AI chat to start a conversation without signup, or check out our other helpful resources.',
   },
   twitter: {
-    title: '404: Page Not Found | AI-Chats.net',
-    description: 'The page you are looking for could not be found. Please check the URL or return to the homepage.',
+    title: 'Page Not Found - Free AI Chat | AI-Chats.net',
+    description: 'Sorry, this page doesn\'t exist. Return to our free AI chat to start a conversation without signup, or check out our other helpful resources.',
   }
 };
 

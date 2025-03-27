@@ -3,8 +3,8 @@ import { generateMetadata } from '@/utils/metadata';
 
 // Base metadata for the chat page
 export const metadata: Metadata = generateMetadata({
-  title: 'AI Chat - Start a Conversation',
-  description: 'Start an intelligent conversation with our advanced AI models. Get instant, accurate responses powered by cutting-edge language models like GPT-4, Claude, and more.',
+  title: 'Free AI Chat - No Signup Required',
+  description: 'Chat instantly with our intelligent AI assistant - no account creation, no hassle. Experience natural, helpful conversations that understand your needs.',
   path: '/chat',
 });
 

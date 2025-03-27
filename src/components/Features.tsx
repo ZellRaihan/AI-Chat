@@ -3,6 +3,7 @@
 import React from 'react';
 import styles from '../styles/Features.module.css';
 import { useTheme } from './ThemeProvider';
+import Image from 'next/image';
 
 // Feature item component
 const FeatureItem = ({ icon, title, description }: { icon: React.ReactNode, title: string, description: string }) => {
@@ -59,6 +60,17 @@ const Features = () => {
             quote="I was skeptical about AI chat tools until I tried this one. Now I use it daily for everything from drafting client emails to helping my kids with homework questions. It's become our family's go-to helper."
             author="James"
             role="Business Owner"
+          />
+        </div>
+        
+        <div className={styles.bannerContainer}>
+          <Image 
+            src="/AI-Chat-Banner.webp" 
+            alt="AI Chat Experience - Intelligent conversations that understand you" 
+            className={styles.bannerImage}
+            width={1100}
+            height={400}
+            priority
           />
         </div>
         
