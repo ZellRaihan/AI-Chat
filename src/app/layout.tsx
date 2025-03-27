@@ -29,11 +29,11 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL('https://ai-chats.net'),
   title: {
-    default: 'AI Chat - Intelligent Conversations with Advanced AI',
+    default: '[Free] AI Chat - (No Signup) Start chat Now',
     template: '%s | AI Chat'
   },
-  description: 'Experience intelligent conversations with our advanced AI chat platform. Get instant, accurate responses powered by cutting-edge language models.',
-  keywords: ['AI chat', 'artificial intelligence', 'chatbot', 'GPT', 'Claude', 'AI assistant', 'intelligent conversations'],
+  description: 'Looking for a free AI chat that actually understands you? AI-Chats.net delivers helpful, human-like conversations without signups, subscriptions, or complications. Try it now!',
+  keywords: ['AI chat', 'artificial intelligence', 'chatbot', 'GPT', 'Claude', 'AI assistant', 'intelligent conversations', 'free chat', 'no signup'],
   authors: [{ name: 'AI Chat Team' }],
   creator: 'AI Chat Team',
   publisher: 'AI Chat',
@@ -59,21 +59,21 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: 'https://ai-chats.net',
     siteName: 'AI Chat',
-    title: 'AI Chat: Your Intelligent Conversation Partner - Free (No Signup)',
-    description: 'Looking for a free AI chat that actually understands you? Our online AI chat assistant delivers helpful, human-like conversations without signups, subscriptions, or complications.',
+    title: '[Free] AI Chat - (No Signup) Start chat Now',
+    description: 'Looking for a free AI chat that actually understands you? AI-Chats.net delivers helpful, human-like conversations without signups, subscriptions, or complications. Try it now!',
     images: [
       {
         url: '/AI-Chat-Banner.webp',
         width: 1100,
         height: 400,
-        alt: 'AI Chat',
+        alt: 'AI Chat - Free AI Chat Assistant',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AI Chat: Your Intelligent Conversation Partner - Free (No Signup)',
-    description: 'Looking for a free AI chat that actually understands you? Our online AI chat assistant delivers helpful, human-like conversations without signups, subscriptions, or complications.',
+    title: '[Free] AI Chat - (No Signup) Start chat Now',
+    description: 'Looking for a free AI chat that actually understands you? AI-Chats.net delivers helpful, human-like conversations without signups, subscriptions, or complications. Try it now!',
     images: ['/AI-Chat-Banner.webp'],
     creator: '@aichat',
   },
@@ -88,15 +88,16 @@ export const metadata: Metadata = {
     apple: [
       { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
     ],
+    shortcut: ['/favicon.ico'],
   },
   manifest: '/manifest.json',
   verification: {
-    google: 'your-verification-code',
+    google: 'google-site-verification',
   },
   appleWebApp: {
     capable: true,
     statusBarStyle: 'default',
-    title: 'AI Chat',
+    title: '[Free] AI Chat',
   },
   formatDetection: {
     telephone: false,
